@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Nutritions</string>
+    <string name="action_settings">Settings</string>
+    <string name="Protein">Protein</string>
+    <string name="Carbohydrate">Carbohydrate</string>
+    <string name="Fat">Fat</string>
+    <string name="addButton">Add Nutrients</string>
+    <string name="food">Food</string>
+    <string name="backButton">Back</string>
+    <string name="addRandom">add random</string>
+    <string name="Calcium">Calcium</string>
+    <string name="Iodine">Iodine</string>
+    <string name="Iron">Iron</string>
+    <string name="Kalium">Kalium</string>
+    <string name="Magnesium">Magnesium</string>
+    <string name="Natrium">Natrium</string>
+    <string name="VitaminA">VitaminA</string>
+    <string name="VitaminB1">VitaminB1</string>
+    <string name="VitaminB2">VitaminB2</string>
+    <string name="VitaminB3">VitaminB3</string>
+    <string name="VitaminB6">VitaminB6</string>
+    <string name="VitaminB9">VitaminB9</string>
+    <string name="VitaminB12">VitaminB12</string>
+    <string name="VitaminC">VitaminC</string>
+    <string name="VitaminD">VitaminD</string>
+    <string name="Zinc">Zinc</string>
+    <string name="addProduct">Add product</string>
+    <string name="selectProductHint">Select Product</string>
+
+</resources>

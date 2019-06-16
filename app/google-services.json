@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "581395824534",
+    "firebase_url": "https://nutritions-9e0ed.firebaseio.com",
+    "project_id": "nutritions-9e0ed",
+    "storage_bucket": "nutritions-9e0ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581395824534:android:e6c5de0e4ae8f5a7",
+        "android_client_info": {
+          "package_name": "com.example.nutritions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581395824534-afbtg60bje9hec7mcsp95713r4gg76k4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCey5EcfJQEikpkCV0r524Wnm-vTbz9B_8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

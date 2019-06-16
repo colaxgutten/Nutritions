@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:id="@+id/proteinText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Protein"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:id="@+id/proteinValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/proteinBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/carbohydrateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/Carbohydrate"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/carbohydrateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/carbohydrateBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/fatText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Fat"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/fatValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/fatBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/calciumText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Calcium"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/calciumValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/calciumBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/iodineText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Iodine"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/iodineValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/iodineBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/ironText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Iron"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/ironValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/ironBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/magnesiumText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Magnesium"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/magnesiumValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/magnesiumBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/kaliumText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Kalium"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/kaliumValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/kaliumBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/natriumText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Natrium"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/natriumValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/natriumBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/zincText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Zinc"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/zincValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/zincBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminAText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminA"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminAValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminABar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminB1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminB1"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminB1Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminB1Bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminB2Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminB2"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminB2Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminB2Bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminB3Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminB3"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminB3Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminB3Bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminB6Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminB6"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminB6Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminB6Bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminB9Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminB9"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminB9Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminB9Bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminB12Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminB12"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminB12Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminB12Bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminCText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminC"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminCValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminCBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
+                android:id="@+id/vitaminDText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/VitaminD"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/vitaminDValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/vitaminDBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="109dp"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/addButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginRight="80dp"
+                android:background="@mipmap/ic_launcher"
+                android:text="@string/addButton" />
+
+            <Button
+                android:id="@+id/addrandom"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginRight="80dp"
+                android:background="@mipmap/ic_launcher"
+                android:text="@string/addRandom" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+</android.support.constraint.ConstraintLayout>
