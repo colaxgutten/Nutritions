@@ -905,6 +905,10 @@
                 android:layout_marginRight="80dp"
                 android:background="@mipmap/ic_launcher"
                 android:text="@string/addRandom" />
+            <com.github.mikephil.charting.charts.PieChart
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/pieChart"></com.github.mikephil.charting.charts.PieChart>
         </LinearLayout>
 
     </LinearLayout>

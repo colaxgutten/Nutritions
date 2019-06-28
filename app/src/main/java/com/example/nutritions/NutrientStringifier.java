@@ -5,6 +5,7 @@ public class NutrientStringifier {
         String percentValue = "";
         String unitType="mg";
         double percent = 0;
+        double roundedValue = (double)((int)(value*100))/100;
         percent = getPercent(value,nutrientType);
         percent = Math.round(percent);
         percentValue = percent+" %";
@@ -12,7 +13,7 @@ public class NutrientStringifier {
             unitType="g";
         if (nutrientType.equals("kcal"))
             unitType="kcal";
-        return value+unitType+" ("+percentValue+")";
+        return roundedValue+unitType+" ("+percentValue+")";
     }
     public static double getPercent(double value,String nutrientType){
         double percent = 0;

@@ -15,6 +15,12 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.nutritions.databinding.ActivityMainBinding;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +32,7 @@ import android.databinding.DataBindingUtil;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -36,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     CurrentDate currentDate;
     String username;
     User user;
+    PieChart pieChart;
     ModelFirebaseSynchronizer modelFirebaseSynchronizer;
     DatabaseReference reference;
     TodayNutritionController todayNutritionController;
@@ -52,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         currentDate = new CurrentDate();
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         loadDaily();
+        pieChart = findViewById(R.id.pieChart);
+        loadDefaultPieChart();
         binding.setTodayNutritionsModel(todayNutritionsModel);
         user = new User();
         user.setProtein(0);
@@ -228,6 +238,39 @@ public class MainActivity extends AppCompatActivity {
         vitaminB12Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminB12.get(),"vitaminB12"));
         vitaminCBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminC.get(),"vitaminC"));
         vitaminDBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminD.get(),"vitaminD"));
+        //loads and refreshes data of pieChart
+        addDataSet(getNutrtionBalance(),getNutritionBalanceProperties());
+    }
+
+    private ArrayList<String> getNutritionBalanceProperties() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Protein");
+        list.add("Carbohydrate");
+        list.add("Fat");
+        return list;
+    }
+
+    //returns the calories balance of protein, carbs and fat. Note that fat gives 2.25 more calories per gram than carbs or protein
+    private ArrayList<Integer> getNutrtionBalance() {
+        ArrayList<Integer> balance = new ArrayList<>();
+        double protein = todayNutritionsModel.protein.get();
+        double carbohydrate = todayNutritionsModel.carbohydrate.get();
+        double fat = todayNutritionsModel.fat.get()*2.25;
+        System.out.println(protein + "protein in getNutritionBalance");
+        System.out.println(carbohydrate + "carbohydrate in getNutritionBalance");
+        System.out.println(fat + "fat in getNutritionBalance");
+
+        double sum = protein+carbohydrate+fat;
+        if (sum==0){
+            balance.add(1);
+            balance.add(1);
+            balance.add(1);
+        } else {
+            balance.add((int)((protein/sum)*100));
+            balance.add((int)((carbohydrate/sum)*100));
+            balance.add((int)((fat/sum)*100));
+        }
+        return balance;
     }
 
     public void addNutrientsButtonClick(View v){
@@ -304,6 +347,74 @@ public class MainActivity extends AppCompatActivity {
             todayNutritionsModel.natrium.set(0.0);
             todayNutritionsModel.zinc.set(0.0);
         }
+    }
+
+    public void loadDefaultPieChart(){
+        Description d = new Description();
+        d.setText("Balance");
+        pieChart.setCenterText("Balance");
+        pieChart.setCenterTextSize(10);
+        pieChart.setTransparentCircleAlpha(0);
+        pieChart.setDrawEntryLabels(true);
+        pieChart.setHoleRadius(5);
+        pieChart.setDescription(d);
+        addDataSet(pieChart);
+    }
+
+    //values : Protein, Carbohydrate, Fat
+    public void addDataSet(ArrayList<Integer> values, ArrayList<String> properties){
+        String defaultErrorString = "Error";
+        ArrayList<PieEntry> yEntries = new ArrayList<>();
+        Description d = new Description();
+        d.setText("");
+        pieChart.setCenterText("Balance");
+        pieChart.setCenterTextSize(10);
+        pieChart.setTransparentCircleAlpha(0);
+        pieChart.setDrawEntryLabels(true);
+        pieChart.setHoleRadius(5);
+        pieChart.setDescription(d);
+        for (int i = 0; i<values.size();i++){
+            String property = properties.size()==values.size() ? properties.get(i) : defaultErrorString;
+            yEntries.add(new PieEntry(values.get(i),property));
+            System.out.println(property+": "+values.get(i));
+        }
+        PieDataSet pieDataSet = new PieDataSet(yEntries,"");
+        pieDataSet.setSliceSpace(2);
+        pieDataSet.setValueTextSize(12);
+        pieDataSet.setValueTextColor(ColorTemplate.rgb("000000"));
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(ColorTemplate.rgb("ffff00"));
+        colors.add(ColorTemplate.rgb("ff3300"));
+        colors.add(ColorTemplate.rgb("4da6ff"));
+        pieDataSet.setColors(colors);
+        PieData data = new PieData(pieDataSet);
+        pieChart.setData(data);
+        pieChart.invalidate();
+    }
+
+    public void addDataSet(PieChart pie){
+        ArrayList<PieEntry> yEntries = new ArrayList<>();
+        ArrayList<String> properties = new ArrayList<>();
+        properties.add("Protein");
+        properties.add("Carbohydrate");
+        properties.add("Fat");
+        yEntries.add(new PieEntry(1,"Protein"));
+        yEntries.add(new PieEntry(1,"Carbohydrate"));
+        yEntries.add(new PieEntry(1,"Fat"));
+
+        PieDataSet pieDataSet = new PieDataSet(yEntries,"Nutritions");
+        pieDataSet.setSliceSpace(2);
+        pieDataSet.setValueTextSize(12);
+        pieDataSet.setValueTextColor(ColorTemplate.rgb("000000"));
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(ColorTemplate.rgb("ffff00"));
+        colors.add(ColorTemplate.rgb("ff3300"));
+        colors.add(ColorTemplate.rgb("4da6ff"));
+        pieDataSet.setColors(colors);
+        PieData data = new PieData(pieDataSet);
+        pieChart.setData(data);
+        pieChart.invalidate();
+
     }
 
     public void initalizeBars(){
