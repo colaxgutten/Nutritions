@@ -33,6 +33,55 @@
             tools:layout_editor_absoluteY="0dp">
 
             <TextView
+                android:id="@+id/kcalText"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Kcal"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:id="@+id/kcalValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:textColorLink="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="42dp"
+                tools:layout_conversion_absoluteWidth="46dp"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ProgressBar
+                android:id="@+id/kcalBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="99dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <TextView
                 android:id="@+id/proteinText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

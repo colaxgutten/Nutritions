@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.databinding.DataBindingUtil;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -55,59 +57,59 @@ public class MainActivity extends AppCompatActivity {
         user.setProtein(0);
         binding.setUser(user);
 
+
         Button addNutrients = findViewById(R.id.addButton);
         Button addRandom = findViewById(R.id.addrandom);
         initalizeBars();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         reference = database.getReference("users");
-        FoodRegister foodRegister = new FoodRegister();
-        foodRegister.saveFoodRegister(modelFirebaseSynchronizer,reference);
         final DatabaseReference nutrients = database.getReference("users").child(username).child(currentDate.getCurrentDate());
         nutrients.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child("protein").exists()){
-                double protein = dataSnapshot.child("protein").getValue(Double.class);
-                double fat = dataSnapshot.child("fat").getValue(Double.class);
-                double carbohydrate = dataSnapshot.child("carbohydrate").getValue(Double.class);
-                double vitaminA = dataSnapshot.child("vitaminA").getValue(Double.class);
-                double vitaminB1 = dataSnapshot.child("vitaminB1").getValue(Double.class);
-                double vitaminB2 = dataSnapshot.child("vitaminB2").getValue(Double.class);
-                double vitaminB3 = dataSnapshot.child("vitaminB3").getValue(Double.class);
-                double vitaminB6 = dataSnapshot.child("vitaminB6").getValue(Double.class);
-                double vitaminB9 = dataSnapshot.child("vitaminB9").getValue(Double.class);
-                double vitaminB12 = dataSnapshot.child("vitaminB12").getValue(Double.class);
-                double vitaminC = dataSnapshot.child("vitaminC").getValue(Double.class);
-                double calcium = dataSnapshot.child("calcium").getValue(Double.class);
-                double iodine = dataSnapshot.child("iodine").getValue(Double.class);
-                double iron = dataSnapshot.child("iron").getValue(Double.class);
-                double kalium = dataSnapshot.child("kalium").getValue(Double.class);
-                double magnesium = dataSnapshot.child("magnesium").getValue(Double.class);
-                double natrium = dataSnapshot.child("natrium").getValue(Double.class);
-                double zinc = dataSnapshot.child("zinc").getValue(Double.class);
-                double vitaminD = dataSnapshot.child("vitaminD").getValue(Double.class);
-                todayNutritionsModel.fat.set(fat);
-                todayNutritionsModel.protein.set(protein);
-                todayNutritionsModel.carbohydrate.set(carbohydrate);
-                todayNutritionsModel.vitaminA.set(vitaminA);
-                todayNutritionsModel.vitaminB1.set(vitaminB1);
-                todayNutritionsModel.vitaminB2.set(vitaminB2);
-                todayNutritionsModel.vitaminB3.set(vitaminB3);
-                todayNutritionsModel.vitaminB6.set(vitaminB6);
-                todayNutritionsModel.vitaminB9.set(vitaminB9);
-                todayNutritionsModel.vitaminB12.set(vitaminB12);
-                todayNutritionsModel.vitaminC.set(vitaminC);
-                todayNutritionsModel.vitaminD.set(vitaminD);
-                todayNutritionsModel.calcium.set(calcium);
-                todayNutritionsModel.iodine.set(iodine);
-                todayNutritionsModel.iron.set(iron);
-                todayNutritionsModel.magnesium.set(magnesium);
-                todayNutritionsModel.kalium.set(kalium);
-                todayNutritionsModel.natrium.set(natrium);
-                todayNutritionsModel.zinc.set(zinc);
-                updateData();
+                    double kcal = dataSnapshot.child("kcal").getValue(Double.class);
+                    double protein = dataSnapshot.child("protein").getValue(Double.class);double fat = dataSnapshot.child("fat").getValue(Double.class);
+                    double carbohydrate = dataSnapshot.child("carbohydrate").getValue(Double.class);
+                    double vitaminA = dataSnapshot.child("vitaminA").getValue(Double.class);
+                    double vitaminB1 = dataSnapshot.child("vitaminB1").getValue(Double.class);
+                    double vitaminB2 = dataSnapshot.child("vitaminB2").getValue(Double.class);
+                    double vitaminB3 = dataSnapshot.child("vitaminB3").getValue(Double.class);
+                    double vitaminB6 = dataSnapshot.child("vitaminB6").getValue(Double.class);
+                    double vitaminB9 = dataSnapshot.child("vitaminB9").getValue(Double.class);
+                    double vitaminB12 = dataSnapshot.child("vitaminB12").getValue(Double.class);
+                    double vitaminC = dataSnapshot.child("vitaminC").getValue(Double.class);
+                    double calcium = dataSnapshot.child("calcium").getValue(Double.class);
+                    double iodine = dataSnapshot.child("iodine").getValue(Double.class);
+                    double iron = dataSnapshot.child("iron").getValue(Double.class);
+                    double kalium = dataSnapshot.child("kalium").getValue(Double.class);
+                    double magnesium = dataSnapshot.child("magnesium").getValue(Double.class);
+                    double natrium = dataSnapshot.child("natrium").getValue(Double.class);
+                    double zinc = dataSnapshot.child("zinc").getValue(Double.class);
+                    double vitaminD = dataSnapshot.child("vitaminD").getValue(Double.class);
+                    todayNutritionsModel.kcal.set(kcal);
+                    todayNutritionsModel.fat.set(fat);
+                    todayNutritionsModel.protein.set(protein);
+                    todayNutritionsModel.carbohydrate.set(carbohydrate);
+                    todayNutritionsModel.vitaminA.set(vitaminA);
+                    todayNutritionsModel.vitaminB1.set(vitaminB1);
+                    todayNutritionsModel.vitaminB2.set(vitaminB2);
+                    todayNutritionsModel.vitaminB3.set(vitaminB3);
+                    todayNutritionsModel.vitaminB6.set(vitaminB6);
+                    todayNutritionsModel.vitaminB9.set(vitaminB9);
+                    todayNutritionsModel.vitaminB12.set(vitaminB12);
+                    todayNutritionsModel.vitaminC.set(vitaminC);
+                    todayNutritionsModel.vitaminD.set(vitaminD);
+                    todayNutritionsModel.calcium.set(calcium);
+                    todayNutritionsModel.iodine.set(iodine);
+                    todayNutritionsModel.iron.set(iron);
+                    todayNutritionsModel.magnesium.set(magnesium);
+                    todayNutritionsModel.kalium.set(kalium);
+                    todayNutritionsModel.natrium.set(natrium);
+                    todayNutritionsModel.zinc.set(zinc);
+                    updateData();
                 } else {
-                    saveEmptyModel(nutrients);
+                    saveEmptyModel(reference);
                 }
             }
 
@@ -145,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateData(){
+        ProgressBar kcalBar = findViewById(R.id.kcalBar);
         ProgressBar proteinBar = findViewById(R.id.proteinBar);
         ProgressBar fatBar = findViewById(R.id.fatBar);
         ProgressBar carbohydrateBar = findViewById(R.id.carbohydrateBar);
@@ -164,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         ProgressBar vitaminB12Bar = findViewById(R.id.vitaminB12Bar);
         ProgressBar vitaminCBar = findViewById(R.id.vitaminCBar);
         ProgressBar vitaminDBar = findViewById(R.id.vitaminDBar);
+        TextView kcalText = findViewById(R.id.kcalValue);
         TextView proteinText = findViewById(R.id.proteinValue);
         TextView carbohydrateText = findViewById(R.id.carbohydrateValue);
         TextView fatText = findViewById(R.id.fatValue);
@@ -183,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
         TextView vitaminB12Text = findViewById(R.id.vitaminB12Value);
         TextView vitaminCText = findViewById(R.id.vitaminCValue);
         TextView vitaminDText = findViewById(R.id.vitaminDValue);
+        System.out.println("Data should be updated");
+        kcalText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.kcal.get(),"kcal"));
         proteinText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.protein.get(),"protein"));
         carbohydrateText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.carbohydrate.get(),"carbohydrate"));
         fatText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.fat.get(),"fat"));
@@ -202,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
         vitaminB12Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminB12.get(),"vitaminB12"));
         vitaminCText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminC.get(),"vitaminC"));
         vitaminDText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminD.get(),"vitaminD"));
+        kcalBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.kcal.get(),"kcal"));
         proteinBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.protein.get(),"protein"));
         fatBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.fat.get(),"fat"));
         carbohydrateBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.carbohydrate.get(),"carbohydrate"));
@@ -225,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addNutrientsButtonClick(View v){
         Random r =new Random();
+        double kcal = todayNutritionsModel.kcal.get()+r.nextDouble()*30;
         double protein = todayNutritionsModel.protein.get()+r.nextDouble()*30;
         double fat = todayNutritionsModel.fat.get()+r.nextDouble()*30;
         double carbohydrate = todayNutritionsModel.carbohydrate.get()+r.nextDouble()*30;
@@ -244,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
         double kalium = todayNutritionsModel.kalium.get()+r.nextDouble()*30;
         double natrium = todayNutritionsModel.natrium.get()+r.nextDouble()*30;
         double zinc = todayNutritionsModel.zinc.get()+r.nextDouble()*30;
+        todayNutritionsModel.kcal.set(kcal);
         todayNutritionsModel.fat.set(fat);
         todayNutritionsModel.protein.set(protein);
         todayNutritionsModel.carbohydrate.set(carbohydrate);
@@ -271,10 +280,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadDaily(){
-        model = DailyNutritionLimitsModel.getInstance();
         todayNutritionController = new TodayNutritionController();
         todayNutritionsModel = todayNutritionController.getTodayNutritionsModel();
         if (todayNutritionsModel.carbohydrate.get()==null) {
+            todayNutritionsModel.kcal.set(0.0);
             todayNutritionsModel.protein.set(0.0);
             todayNutritionsModel.fat.set(0.0);
             todayNutritionsModel.carbohydrate.set(0.0);

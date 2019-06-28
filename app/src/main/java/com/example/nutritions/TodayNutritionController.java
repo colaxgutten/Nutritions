@@ -89,10 +89,15 @@ public class TodayNutritionController {
         todayNutritionsModel.zinc.set(current+zinc);
     }
 
+    public void addKcal(double kcal){
+        double current = todayNutritionsModel.kcal.get();
+        todayNutritionsModel.kcal.set(kcal + current);
+    }
     public void addFood(FoodNutrientConsentrationModel model){
         if (model!=null) {
             double grams = model.getGrams();
             double multiplier = grams/100;
+            this.addKcal(model.getKcalPer100()*multiplier);
             this.addProtein(model.getProteinsPer100() *multiplier);
             this.addCalcium(model.getCarbohydratesPer100()*multiplier);
             this.addFat(model.getFatPer100()*multiplier);

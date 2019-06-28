@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class FoodNutrientConsentrationModel {
     private String foodName;
+    private double kcal;
     private double grams;
     private double proteinsPer100;
     private double fatPer100;
@@ -28,6 +29,7 @@ public class FoodNutrientConsentrationModel {
     public FoodNutrientConsentrationModel(String name){
         this.foodName = name;
         grams=0;
+        kcal=0;
         proteinsPer100=0;
         fatPer100=0;
         carbohydratesPer100=0;
@@ -47,6 +49,14 @@ public class FoodNutrientConsentrationModel {
         ironPer100=0;
         zincPer100=0;
         natriumPer100=0;
+    }
+
+    public double getKcalPer100(){
+        return kcal;
+    }
+
+    public void setKcalPer100(double kcalPer100){
+        kcal = kcalPer100;
     }
 
     public String getFoodName() {

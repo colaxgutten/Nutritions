@@ -1,6 +1,7 @@
 package com.example.nutritions;
 
 public class StaticDefaults {
+    public static double MAX_KCAL = 2500;
     public static double MAX_PROTEINS = 136;
     public static double MAX_CARBOHYDRATES = 360;
     public static double MAX_FAT = 91;

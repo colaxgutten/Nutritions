@@ -5,6 +5,7 @@ public class DailyNutritionLimitsModel {
     private static DailyNutritionLimitsModel model;
 
 
+    public double kcalMax;
     public double proteinMax;
     private double carbohydrateMax;
     private double fatMax;

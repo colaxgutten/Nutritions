@@ -5,6 +5,7 @@ import android.databinding.ObservableField;
 import java.util.HashMap;
 
 public class TodayNutritionsModel {
+    public final ObservableField<Double> kcal = new ObservableField<>();
     public final ObservableField<Double> protein = new ObservableField<>();
     public final ObservableField<Double> carbohydrate = new ObservableField<>();
     public final ObservableField<Double> fat = new ObservableField<>();
@@ -27,6 +28,7 @@ public class TodayNutritionsModel {
 
     public HashMap<String,Double> getHashMap(){
         HashMap<String,Double> map = new HashMap<>();
+        map.put("kcal",this.kcal.get());
         map.put("protein",this.protein.get());
         map.put("carbohydrate",this.carbohydrate.get());
         map.put("fat",this.fat.get());

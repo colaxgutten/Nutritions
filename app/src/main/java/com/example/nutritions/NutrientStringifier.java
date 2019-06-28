@@ -3,15 +3,23 @@ package com.example.nutritions;
 public class NutrientStringifier {
     public static String ProgressBarStringify(double value,String nutrientType){
         String percentValue = "";
+        String unitType="mg";
         double percent = 0;
         percent = getPercent(value,nutrientType);
         percent = Math.round(percent);
         percentValue = percent+" %";
-        return percentValue;
+        if (nutrientType.equals("protein") || nutrientType.equals("fat") || nutrientType.equals("carbohydrate"))
+            unitType="g";
+        if (nutrientType.equals("kcal"))
+            unitType="kcal";
+        return value+unitType+" ("+percentValue+")";
     }
     public static double getPercent(double value,String nutrientType){
         double percent = 0;
         switch (nutrientType){
+            case "kcal" :
+                percent = (value/StaticDefaults.MAX_KCAL)*100;
+                break;
             case "protein" :
                 percent = (value/StaticDefaults.MAX_PROTEINS)*100;
                 break;

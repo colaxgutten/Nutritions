@@ -26,5 +26,6 @@
     <string name="Zinc">Zinc</string>
     <string name="addProduct">Add product</string>
     <string name="selectProductHint">Select Product</string>
+    <string name="Kcal">Calories</string>
 
 </resources>
