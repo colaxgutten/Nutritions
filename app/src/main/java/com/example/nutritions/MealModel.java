@@ -1,16 +1,21 @@
 package com.example.nutritions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MealModel {
 
-    public ArrayList<FoodNutrientConsentrationModel> products;
+    private HashMap<String, Double> meal;
 
     public MealModel(){
-        this.products = new ArrayList<FoodNutrientConsentrationModel>();
+        meal = new HashMap<>();
     }
 
-    public void addProduct(FoodNutrientConsentrationModel product){
-        products.add(product);
+    public void addProduct(String food, Double grams){
+        meal.put(food,grams);
+    }
+
+    public HashMap<String, Double> getMeal() {
+        return meal;
     }
 }

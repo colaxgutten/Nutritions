@@ -1,5 +1,7 @@
 package com.example.nutritions;
 
+import java.util.HashMap;
+
 public class MealController {
     private MealModel meal;
     private ProductFirebaseHandler firebaseHandler;
@@ -14,19 +16,11 @@ public class MealController {
     }
 
     public void addProductToMeal(String productName, double grams){
-        FoodNutrientConsentrationModel product = firebaseHandler.getProductFromFirebase(productName);
-        if (product== null)
-            return;
-        product.setGrams(grams);
-        meal.addProduct(product);
+        meal.addProduct(productName,grams);
     }
 
-    public void addProductToMeal(String productName){
-        addProductToMeal(productName, 100);
-    }
-
-    public MealModel getMeal(){
-        return this.meal;
+    public HashMap<String, Double> getMeal(){
+        return meal.getMeal();
     }
 
 }

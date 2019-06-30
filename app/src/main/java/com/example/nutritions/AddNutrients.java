@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,16 +18,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddNutrients extends AppCompatActivity {
     String selectedFood= "";
+    String selectedFoodForMeal = "";
     CurrentDate currentDate;
     DatabaseReference usersReference;
     DatabaseReference usersReference2;
     DatabaseReference foodReference;
+    DatabaseReference mealReference;
     DataSnapshot foodSnapShot;
     DataSnapshot userSnapShot;
+    MealController mealController;
     SnapshotToModelCoverter converter;
+    ArrayAdapter<String> adapter;
+    ListView listView;
+    ArrayList<String> mealList;
     String username;
     boolean foodLoaded = false;
     @Override
@@ -34,11 +42,17 @@ public class AddNutrients extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_nutrients);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mealController = new MealController();
         currentDate = new CurrentDate();
         username = "daniel";
+        listView = findViewById(R.id.mealListView);
+        mealList = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,mealList);
+        listView.setAdapter(adapter);
         converter = new SnapshotToModelCoverter();
         usersReference2 = database.getReference("users");
         usersReference = database.getReference("users").child(username);
+        mealReference = database.getReference("users").child("meal");
         usersReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -73,6 +87,32 @@ public class AddNutrients extends AppCompatActivity {
                                       }
         );
         Button addButton = findViewById(R.id.addProductButton);
+        Button addProductToMealButton = findViewById(R.id.addProductMealButton);
+        Button addMealButton = findViewById(R.id.addMealButton);
+        addProductToMealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedFoodForMeal.length()>=1){
+
+                    if (foodSnapShot.child(selectedFoodForMeal).exists()){
+                        EditText weight = findViewById(R.id.foodWeightMeal);
+                        String gramsString = weight.getText().toString();
+                        double grams;
+                        if (gramsString.length()>=1){
+                            grams = Double.parseDouble(gramsString);
+                        } else
+                            grams=100;
+                        mealController.addProductToMeal(selectedFoodForMeal,grams);
+                        mealList.add(selectedFoodForMeal);
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        System.out.println("Food doesn't exist.");
+                    }
+                } else {
+                    System.out.println("You have no selected food. . .");
+                }
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,16 +146,21 @@ public class AddNutrients extends AppCompatActivity {
 
     }
 
+
     public void loadFood(){
         AutoCompleteTextView foodView = findViewById(R.id.foodList);
+        AutoCompleteTextView foodViewMeal = findViewById(R.id.foodListMeal);
         ArrayList<String> foodList = new ArrayList<>();
             for (DataSnapshot d : foodSnapShot.getChildren()) {
                 foodList.add(d.getKey());
-                System.out.println(d.getKey());
             }
         System.out.println("Food Loaded");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_activated_1,foodList);
+        ArrayAdapter<String> adapterMeal = new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1,foodList);
         foodView.setAdapter(adapter);
+        foodViewMeal.setAdapter(adapterMeal);
+        foodViewMeal.setDropDownWidth(-1);
+        foodView.setDropDownWidth(-1);
         foodView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -123,6 +168,14 @@ public class AddNutrients extends AppCompatActivity {
                 if (selected!=null){
                     selectedFood = selected;
                 }
+            }
+        });
+        foodViewMeal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selected = (String) parent.getItemAtPosition(position);
+                if (selected!=null)
+                    selectedFoodForMeal=selected;
             }
         });
     }

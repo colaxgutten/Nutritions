@@ -51,13 +51,13 @@
 
             <AutoCompleteTextView
                 android:id="@+id/foodList"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginRight="80dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
                 android:hint="@string/selectProductHint"
                 android:text=""
                 tools:layout_editor_absoluteX="185dp"
@@ -69,8 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal"
-                android:hint="0" />
+                android:hint="0"
+                android:inputType="numberDecimal" />
         </LinearLayout>
 
         <Button
@@ -80,6 +80,62 @@
             android:layout_width="169dp"
             android:layout_height="wrap_content"
             android:text="@string/addProduct" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <AutoCompleteTextView
+                android:id="@+id/foodListMeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/selectProductHint"
+                android:text=""
+                tools:layout_editor_absoluteX="185dp"
+                tools:layout_editor_absoluteY="48dp" />
+
+            <EditText
+                android:id="@+id/foodWeightMeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="0"
+                android:inputType="numberDecimal" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addProductMealButton"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="169dp"
+            android:layout_height="wrap_content"
+            android:text="@string/addProductMeal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/mealListView"
+                android:layout_width="190dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/addMealButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/addMeal" />
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

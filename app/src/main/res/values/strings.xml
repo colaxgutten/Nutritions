@@ -27,5 +27,7 @@
     <string name="addProduct">Add product</string>
     <string name="selectProductHint">Select Product</string>
     <string name="Kcal">Calories</string>
+    <string name="addProductMeal">Add to meal</string>
+    <string name="addMeal">Add meal</string>
 
 </resources>
