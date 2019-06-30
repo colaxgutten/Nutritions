@@ -29,5 +29,6 @@
     <string name="Kcal">Calories</string>
     <string name="addProductMeal">Add to meal</string>
     <string name="addMeal">Add meal</string>
+    <string name="mealName">Meal name</string>
 
 </resources>

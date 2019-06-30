@@ -23,6 +23,7 @@ import java.util.HashMap;
 public class AddNutrients extends AppCompatActivity {
     String selectedFood= "";
     String selectedFoodForMeal = "";
+    String mealName = "";
     CurrentDate currentDate;
     DatabaseReference usersReference;
     DatabaseReference usersReference2;
@@ -89,6 +90,17 @@ public class AddNutrients extends AppCompatActivity {
         Button addButton = findViewById(R.id.addProductButton);
         Button addProductToMealButton = findViewById(R.id.addProductMealButton);
         Button addMealButton = findViewById(R.id.addMealButton);
+        addMealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText mealNameText = findViewById(R.id.addMealText);
+                String mealNameFromView = mealNameText.getText().toString();
+                if (mealNameFromView==null)
+                    mealNameFromView="";
+                mealReference.child(mealNameFromView).setValue(mealController.getMeal());
+                resetMeal();
+            }
+        });
         addProductToMealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +156,12 @@ public class AddNutrients extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void resetMeal(){
+        mealController.NewMeal();
+        mealList.clear();
+        adapter.notifyDataSetChanged();
     }
 
 
