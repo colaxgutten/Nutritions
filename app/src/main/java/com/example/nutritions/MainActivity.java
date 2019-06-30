@@ -5,6 +5,9 @@ import com.example.nutritions.ui.login.LoginActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.ProgressBar;
-import com.example.nutritions.databinding.ActivityMainBinding;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
@@ -21,6 +23,9 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference reference;
     TodayNutritionController todayNutritionController;
     TodayNutritionsModel todayNutritionsModel;
+    String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FirebaseApp.initializeApp(this);
         modelFirebaseSynchronizer = new ModelFirebaseSynchronizer();
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUser.getIdToken(true)
+                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if (task.isSuccessful()) {
+                            String idToken = task.getResult().getToken();
+                            //TODO verify token
+                            // ...
+                        } else {
+                            // Handle error -> task.getException();
+                        }
+                    }
+                });
         username = "daniel";
         currentDate = new CurrentDate();
         loadDaily();
