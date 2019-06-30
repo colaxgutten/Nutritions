@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         binding.setUser(user);
 
 
-        Button addNutrients = findViewById(R.id.addButton);
-        Button addRandom = findViewById(R.id.addrandom);
         initalizeBars();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         reference = database.getReference("users");
@@ -128,24 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        FloatingActionButton addNutrients = findViewById(R.id.addNutrients);
         addNutrients.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                addActivity(v);
-            }
-        });
-        addRandom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNutrientsButtonClick(v);
-            }
-        });
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                addActivity(view);
             }
         });
 
@@ -271,51 +257,6 @@ public class MainActivity extends AppCompatActivity {
             balance.add((int)((fat/sum)*100));
         }
         return balance;
-    }
-
-    public void addNutrientsButtonClick(View v){
-        Random r =new Random();
-        double kcal = todayNutritionsModel.kcal.get()+r.nextDouble()*30;
-        double protein = todayNutritionsModel.protein.get()+r.nextDouble()*30;
-        double fat = todayNutritionsModel.fat.get()+r.nextDouble()*30;
-        double carbohydrate = todayNutritionsModel.carbohydrate.get()+r.nextDouble()*30;
-        double vitaminA = todayNutritionsModel.vitaminA.get()+r.nextDouble()*30;
-        double vitaminB1 = todayNutritionsModel.vitaminB1.get()+r.nextDouble()*30;
-        double vitaminB2 = todayNutritionsModel.vitaminB2.get()+r.nextDouble()*30;
-        double vitaminB3 = todayNutritionsModel.vitaminB3.get()+r.nextDouble()*30;
-        double vitaminB6 = todayNutritionsModel.vitaminB6.get()+r.nextDouble()*30;
-        double vitaminB9 = todayNutritionsModel.vitaminB9.get()+r.nextDouble()*30;
-        double vitaminB12 = todayNutritionsModel.vitaminB12.get()+r.nextDouble()*30;
-        double vitaminC = todayNutritionsModel.vitaminC.get()+r.nextDouble()*30;
-        double vitaminD = todayNutritionsModel.vitaminD.get()+r.nextDouble()*30;
-        double calcium = todayNutritionsModel.calcium.get()+r.nextDouble()*30;
-        double iodine = todayNutritionsModel.iodine.get()+r.nextDouble()*30;
-        double iron = todayNutritionsModel.iron.get()+r.nextDouble()*30;
-        double magnesium = todayNutritionsModel.magnesium.get()+r.nextDouble()*30;
-        double kalium = todayNutritionsModel.kalium.get()+r.nextDouble()*30;
-        double natrium = todayNutritionsModel.natrium.get()+r.nextDouble()*30;
-        double zinc = todayNutritionsModel.zinc.get()+r.nextDouble()*30;
-        todayNutritionsModel.kcal.set(kcal);
-        todayNutritionsModel.fat.set(fat);
-        todayNutritionsModel.protein.set(protein);
-        todayNutritionsModel.carbohydrate.set(carbohydrate);
-        todayNutritionsModel.vitaminA.set(vitaminA);
-        todayNutritionsModel.vitaminB1.set(vitaminB1);
-        todayNutritionsModel.vitaminB2.set(vitaminB2);
-        todayNutritionsModel.vitaminB3.set(vitaminB3);
-        todayNutritionsModel.vitaminB6.set(vitaminB6);
-        todayNutritionsModel.vitaminB9.set(vitaminB9);
-        todayNutritionsModel.vitaminB12.set(vitaminB12);
-        todayNutritionsModel.vitaminC.set(vitaminC);
-        todayNutritionsModel.vitaminD.set(vitaminD);
-        todayNutritionsModel.calcium.set(calcium);
-        todayNutritionsModel.iodine.set(iodine);
-        todayNutritionsModel.iron.set(iron);
-        todayNutritionsModel.magnesium.set(magnesium);
-        todayNutritionsModel.kalium.set(kalium);
-        todayNutritionsModel.natrium.set(natrium);
-        todayNutritionsModel.zinc.set(zinc);
-        modelFirebaseSynchronizer.saveDailyModel(todayNutritionsModel,reference );
     }
 
     public void addActivity(View v){
