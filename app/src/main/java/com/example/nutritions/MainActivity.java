@@ -10,7 +10,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         FirebaseApp.initializeApp(this);
         modelFirebaseSynchronizer = new ModelFirebaseSynchronizer();
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -137,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         addNutrients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addActivity(view);
+                startActivity(new Intent(MainActivity.this, AddProduct.class));
             }
         });
 
@@ -443,13 +441,6 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 }

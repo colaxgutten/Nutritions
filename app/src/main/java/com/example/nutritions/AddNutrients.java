@@ -1,8 +1,12 @@
 package com.example.nutritions;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,7 +26,6 @@ import java.util.ArrayList;
 public class AddNutrients extends AppCompatActivity {
     String selectedFood= "";
     String selectedFoodForMeal = "";
-    String mealName = "";
     CurrentDate currentDate;
     DatabaseReference usersReference;
     DatabaseReference usersReference2;
@@ -36,18 +39,28 @@ public class AddNutrients extends AppCompatActivity {
     ListView listView;
     ArrayList<String> mealList;
     String username;
-    boolean foodLoaded = false;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        startActivityForResult(new Intent(getApplicationContext(), MainActivity.class), 0);
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Add Nutrients");
         setContentView(R.layout.activity_add_nutrients);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         mealController = new MealController();
         currentDate = new CurrentDate();
         username = "daniel";
         listView = findViewById(R.id.mealListView);
-        mealList = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,mealList);
+        mealList = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,mealList);
         listView.setAdapter(adapter);
         converter = new SnapshotToModelCoverter();
         usersReference2 = database.getReference("users");
@@ -94,8 +107,6 @@ public class AddNutrients extends AppCompatActivity {
             public void onClick(View v) {
                 EditText mealNameText = findViewById(R.id.addMealText);
                 String mealNameFromView = mealNameText.getText().toString();
-                if (mealNameFromView==null)
-                    mealNameFromView="";
                 mealReference.child(mealNameFromView).setValue(mealController.getMeal());
                 resetMeal();
             }
@@ -172,7 +183,7 @@ public class AddNutrients extends AppCompatActivity {
                 foodList.add(d.getKey());
             }
         System.out.println("Food Loaded");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_activated_1,foodList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1,foodList);
         ArrayAdapter<String> adapterMeal = new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1,foodList);
         foodView.setAdapter(adapter);
         foodViewMeal.setAdapter(adapterMeal);

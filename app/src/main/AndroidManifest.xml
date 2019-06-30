@@ -17,6 +17,7 @@
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login"></activity>
         <activity android:name=".AddNutrients" />
+        <activity android:name=".AddProduct"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
