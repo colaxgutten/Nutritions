@@ -60,14 +60,11 @@ public class MainActivity extends AppCompatActivity {
         modelFirebaseSynchronizer = new ModelFirebaseSynchronizer();
         username = "daniel";
         currentDate = new CurrentDate();
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         loadDaily();
         pieChart = findViewById(R.id.pieChart);
         loadDefaultPieChart();
-        binding.setTodayNutritionsModel(todayNutritionsModel);
         user = new User();
         user.setProtein(0);
-        binding.setUser(user);
 
 
         Button addNutrients = findViewById(R.id.addButton);
