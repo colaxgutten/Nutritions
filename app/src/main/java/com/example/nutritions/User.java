@@ -1,7 +1,7 @@
 package com.example.nutritions;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 public class User extends BaseObservable {
     private double protein;
