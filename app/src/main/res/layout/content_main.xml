@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -881,30 +881,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/addButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginRight="80dp"
-                android:background="@mipmap/ic_launcher"
-                android:text="@string/addButton" />
-
-            <Button
-                android:id="@+id/addrandom"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginRight="80dp"
-                android:background="@mipmap/ic_launcher"
-                android:text="@string/addRandom" />
             <com.github.mikephil.charting.charts.PieChart
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -913,4 +889,4 @@
 
     </LinearLayout>
 </ScrollView>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

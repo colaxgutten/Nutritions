@@ -1,6 +1,6 @@
 package com.example.nutritions;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 
 import java.util.HashMap;
 
