@@ -30,7 +30,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import androidx.databinding.DataBindingUtil;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,19 +52,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         FirebaseApp.initializeApp(this);
         modelFirebaseSynchronizer = new ModelFirebaseSynchronizer();
-        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mUser.getIdToken(true)
-                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                    public void onComplete(@NonNull Task<GetTokenResult> task) {
-                        if (task.isSuccessful()) {
-                            String idToken = task.getResult().getToken();
-                            //TODO verify token
-                            // ...
-                        } else {
-                            // Handle error -> task.getException();
-                        }
-                    }
-                });
         username = "daniel";
         currentDate = new CurrentDate();
         loadDaily();
@@ -99,26 +85,26 @@ public class MainActivity extends AppCompatActivity {
                     double natrium = dataSnapshot.child("natrium").getValue(Double.class);
                     double zinc = dataSnapshot.child("zinc").getValue(Double.class);
                     double vitaminD = dataSnapshot.child("vitaminD").getValue(Double.class);
-                    todayNutritionsModel.kcal.set(kcal);
-                    todayNutritionsModel.fat.set(fat);
-                    todayNutritionsModel.protein.set(protein);
-                    todayNutritionsModel.carbohydrate.set(carbohydrate);
-                    todayNutritionsModel.vitaminA.set(vitaminA);
-                    todayNutritionsModel.vitaminB1.set(vitaminB1);
-                    todayNutritionsModel.vitaminB2.set(vitaminB2);
-                    todayNutritionsModel.vitaminB3.set(vitaminB3);
-                    todayNutritionsModel.vitaminB6.set(vitaminB6);
-                    todayNutritionsModel.vitaminB9.set(vitaminB9);
-                    todayNutritionsModel.vitaminB12.set(vitaminB12);
-                    todayNutritionsModel.vitaminC.set(vitaminC);
-                    todayNutritionsModel.vitaminD.set(vitaminD);
-                    todayNutritionsModel.calcium.set(calcium);
-                    todayNutritionsModel.iodine.set(iodine);
-                    todayNutritionsModel.iron.set(iron);
-                    todayNutritionsModel.magnesium.set(magnesium);
-                    todayNutritionsModel.kalium.set(kalium);
-                    todayNutritionsModel.natrium.set(natrium);
-                    todayNutritionsModel.zinc.set(zinc);
+                    todayNutritionsModel.setKcal(kcal);
+                    todayNutritionsModel.setFat(fat);
+                    todayNutritionsModel.setProtein(protein);
+                    todayNutritionsModel.setCarbohydrate(carbohydrate);
+                    todayNutritionsModel.setVitaminA(vitaminA);
+                    todayNutritionsModel.setVitaminB1(vitaminB1);
+                    todayNutritionsModel.setVitaminB2(vitaminB2);
+                    todayNutritionsModel.setVitaminB3(vitaminB3);
+                    todayNutritionsModel.setVitaminB6(vitaminB6);
+                    todayNutritionsModel.setVitaminB9(vitaminB9);
+                    todayNutritionsModel.setVitaminB12(vitaminB12);
+                    todayNutritionsModel.setVitaminC(vitaminC);
+                    todayNutritionsModel.setVitaminD(vitaminD);
+                    todayNutritionsModel.setCalcium(calcium);
+                    todayNutritionsModel.setIodine(iodine);
+                    todayNutritionsModel.setIron(iron);
+                    todayNutritionsModel.setMagnesium(magnesium);
+                    todayNutritionsModel.setKalium(kalium);
+                    todayNutritionsModel.setNatrium(natrium);
+                    todayNutritionsModel.setZinc(zinc);
                     updateData();
                 } else {
                     saveEmptyModel(reference);
@@ -188,46 +174,46 @@ public class MainActivity extends AppCompatActivity {
         TextView vitaminCText = findViewById(R.id.vitaminCValue);
         TextView vitaminDText = findViewById(R.id.vitaminDValue);
         System.out.println("Data should be updated");
-        kcalText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.kcal.get(),"kcal"));
-        proteinText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.protein.get(),"protein"));
-        carbohydrateText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.carbohydrate.get(),"carbohydrate"));
-        fatText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.fat.get(),"fat"));
-        calciumText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.calcium.get(),"calcium"));
-        iodineText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.iodine.get(),"iodine"));
-        ironText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.iron.get(),"iron"));
-        magnesiumText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.magnesium.get(),"magnesium"));
-        kaliumText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.kalium.get(),"kalium"));
-        natriumText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.natrium.get(),"natrium"));
-        zincText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.zinc.get(),"zinc"));
-        vitaminAText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminA.get(),"vitaminA"));
-        vitaminB1Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminB1.get(),"vitaminB1"));
-        vitaminB2Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminB2.get(),"vitaminB2"));
-        vitaminB3Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminB3.get(),"vitaminB3"));
-        vitaminB6Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminB6.get(),"vitaminB6"));
-        vitaminB9Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminB9.get(),"vitaminB9"));
-        vitaminB12Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminB12.get(),"vitaminB12"));
-        vitaminCText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminC.get(),"vitaminC"));
-        vitaminDText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.vitaminD.get(),"vitaminD"));
-        kcalBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.kcal.get(),"kcal"));
-        proteinBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.protein.get(),"protein"));
-        fatBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.fat.get(),"fat"));
-        carbohydrateBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.carbohydrate.get(),"carbohydrate"));
-        calciumBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.calcium.get(),"calcium"));
-        iodineBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.iodine.get(),"iodine"));
-        ironBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.iron.get(),"iron"));
-        magnesiumBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.magnesium.get(),"magnesium"));
-        kaliumBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.kalium.get(),"kalium"));
-        natriumBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.natrium.get(),"natrium"));
-        zincBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.zinc.get(),"zinc"));
-        vitaminABar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminA.get(),"vitaminA"));
-        vitaminB1Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminB1.get(),"vitaminB1"));
-        vitaminB2Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminB2.get(),"vitaminB2"));
-        vitaminB3Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminB3.get(),"vitaminB3"));
-        vitaminB6Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminB6.get(),"vitaminB6"));
-        vitaminB9Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminB9.get(),"vitaminB9"));
-        vitaminB12Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminB12.get(),"vitaminB12"));
-        vitaminCBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminC.get(),"vitaminC"));
-        vitaminDBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.vitaminD.get(),"vitaminD"));
+        kcalText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getKcal(),"kcal"));
+        proteinText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getProtein(),"protein"));
+        carbohydrateText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getCarbohydrate(),"carbohydrate"));
+        fatText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getFat(),"fat"));
+        calciumText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getCalcium(),"calcium"));
+        iodineText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getIodine(),"iodine"));
+        ironText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getIron(),"iron"));
+        magnesiumText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getMagnesium(),"magnesium"));
+        kaliumText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getKalium(),"kalium"));
+        natriumText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getNatrium(),"natrium"));
+        zincText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getZinc(),"zinc"));
+        vitaminAText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminA(),"vitaminA"));
+        vitaminB1Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminB1(),"vitaminB1"));
+        vitaminB2Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminB2(),"vitaminB2"));
+        vitaminB3Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminB3(),"vitaminB3"));
+        vitaminB6Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminB6(),"vitaminB6"));
+        vitaminB9Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminB9(),"vitaminB9"));
+        vitaminB12Text.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminB12(),"vitaminB12"));
+        vitaminCText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminC(),"vitaminC"));
+        vitaminDText.setText(NutrientStringifier.ProgressBarStringify(todayNutritionsModel.getVitaminD(),"vitaminD"));
+        kcalBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getKcal(),"kcal"));
+        proteinBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getProtein(),"protein"));
+        fatBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getFat(),"fat"));
+        carbohydrateBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getCarbohydrate(),"carbohydrate"));
+        calciumBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getCalcium(),"calcium"));
+        iodineBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getIodine(),"iodine"));
+        ironBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getIron(),"iron"));
+        magnesiumBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getMagnesium(),"magnesium"));
+        kaliumBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getKalium(),"kalium"));
+        natriumBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getNatrium(),"natrium"));
+        zincBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getZinc(),"zinc"));
+        vitaminABar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminA(),"vitaminA"));
+        vitaminB1Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminB1(),"vitaminB1"));
+        vitaminB2Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminB2(),"vitaminB2"));
+        vitaminB3Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminB3(),"vitaminB3"));
+        vitaminB6Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminB6(),"vitaminB6"));
+        vitaminB9Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminB9(),"vitaminB9"));
+        vitaminB12Bar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminB12(),"vitaminB12"));
+        vitaminCBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminC(),"vitaminC"));
+        vitaminDBar.setProgress((int)NutrientStringifier.getPercent(todayNutritionsModel.getVitaminD(),"vitaminD"));
         //loads and refreshes data of pieChart
         addDataSet(getNutrtionBalance(),getNutritionBalanceProperties());
     }
@@ -243,9 +229,9 @@ public class MainActivity extends AppCompatActivity {
     //returns the calories balance of protein, carbs and fat. Note that fat gives 2.25 more calories per gram than carbs or protein
     private ArrayList<Integer> getNutrtionBalance() {
         ArrayList<Integer> balance = new ArrayList<>();
-        double protein = todayNutritionsModel.protein.get();
-        double carbohydrate = todayNutritionsModel.carbohydrate.get();
-        double fat = todayNutritionsModel.fat.get()*2.25;
+        double protein = todayNutritionsModel.getProtein();
+        double carbohydrate = todayNutritionsModel.getCarbohydrate();
+        double fat = todayNutritionsModel.getFat()*2.25;
         System.out.println(protein + "protein in getNutritionBalance");
         System.out.println(carbohydrate + "carbohydrate in getNutritionBalance");
         System.out.println(fat + "fat in getNutritionBalance");
@@ -270,28 +256,6 @@ public class MainActivity extends AppCompatActivity {
     public void loadDaily(){
         todayNutritionController = new TodayNutritionController();
         todayNutritionsModel = todayNutritionController.getTodayNutritionsModel();
-        if (todayNutritionsModel.carbohydrate.get()==null) {
-            todayNutritionsModel.kcal.set(0.0);
-            todayNutritionsModel.protein.set(0.0);
-            todayNutritionsModel.fat.set(0.0);
-            todayNutritionsModel.carbohydrate.set(0.0);
-            todayNutritionsModel.vitaminA.set(0.0);
-            todayNutritionsModel.vitaminB1.set(0.0);
-            todayNutritionsModel.vitaminB2.set(0.0);
-            todayNutritionsModel.vitaminB3.set(0.0);
-            todayNutritionsModel.vitaminB6.set(0.0);
-            todayNutritionsModel.vitaminB9.set(0.0);
-            todayNutritionsModel.vitaminB12.set(0.0);
-            todayNutritionsModel.vitaminC.set(0.0);
-            todayNutritionsModel.vitaminD.set(0.0);
-            todayNutritionsModel.calcium.set(0.0);
-            todayNutritionsModel.iodine.set(0.0);
-            todayNutritionsModel.iron.set(0.0);
-            todayNutritionsModel.magnesium.set(0.0);
-            todayNutritionsModel.kalium.set(0.0);
-            todayNutritionsModel.natrium.set(0.0);
-            todayNutritionsModel.zinc.set(0.0);
-        }
     }
 
     public void loadDefaultPieChart(){

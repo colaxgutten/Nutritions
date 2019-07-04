@@ -4,26 +4,26 @@ package com.example.nutritions;
 
      public static TodayNutritionsModel addModels(TodayNutritionsModel model1, TodayNutritionsModel model2){
          TodayNutritionsModel model = new TodayNutritionsModel();
-         model.kcal.set(model1.kcal.get()+model2.kcal.get());
-         model.fat.set(model1.fat.get()+model2.fat.get());
-         model.carbohydrate.set(model1.carbohydrate.get()+model2.carbohydrate.get());
-         model.protein.set(model1.protein.get()+model2.protein.get());
-         model.vitaminA.set(model1.vitaminA.get()+model2.vitaminA.get());
-         model.vitaminB1.set(model1.vitaminB1.get()+model2.vitaminB1.get());
-         model.vitaminB2.set(model1.vitaminB2.get()+model2.vitaminB2.get());
-         model.vitaminB3.set(model1.vitaminB3.get()+model2.vitaminB3.get());
-         model.vitaminB6.set(model1.vitaminB6.get()+model2.vitaminB6.get());
-         model.vitaminB9.set(model1.vitaminB9.get()+model2.vitaminB9.get());
-         model.vitaminB12.set(model1.vitaminB12.get()+model2.vitaminB12.get());
-         model.vitaminC.set(model1.vitaminC.get()+model2.vitaminC.get());
-         model.vitaminD.set(model1.vitaminD.get()+model2.vitaminD.get());
-         model.calcium.set(model1.calcium.get()+model2.calcium.get());
-         model.kalium.set(model1.kalium.get()+model2.kalium.get());
-         model.iodine.set(model1.iodine.get()+model2.iodine.get());
-         model.iron.set(model1.iron.get()+model2.iron.get());
-         model.natrium.set(model1.natrium.get()+model2.natrium.get());
-         model.zinc.set(model1.zinc.get()+model2.zinc.get());
-         model.magnesium.set(model1.magnesium.get()+model2.magnesium.get());
+         model.setKcal(model1.getKcal()+model2.getKcal());
+         model.setFat(model1.getFat()+model2.getFat());
+         model.setCarbohydrate(model1.getCarbohydrate()+model2.getCarbohydrate());
+         model.setProtein(model1.getProtein()+model2.getProtein());
+         model.setVitaminA(model1.getVitaminA()+model2.getVitaminA());
+         model.setVitaminB1(model1.getVitaminB1()+model2.getVitaminB1());
+         model.setVitaminB2(model1.getVitaminB2()+model2.getVitaminB2());
+         model.setVitaminB3(model1.getVitaminB3()+model2.getVitaminB3());
+         model.setVitaminB6(model1.getVitaminB6()+model2.getVitaminB6());
+         model.setVitaminB9(model1.getVitaminB9()+model2.getVitaminB9());
+         model.setVitaminB12(model1.getVitaminB12()+model2.getVitaminB12());
+         model.setVitaminC(model1.getVitaminC()+model2.getVitaminC());
+         model.setVitaminD(model1.getVitaminD()+model2.getVitaminD());
+         model.setCalcium(model1.getCalcium()+model2.getCalcium());
+         model.setKalium(model1.getKalium()+model2.getKalium());
+         model.setIodine(model1.getIodine()+model2.getIodine());
+         model.setIron(model1.getIron()+model2.getIron());
+         model.setNatrium(model1.getNatrium()+model2.getNatrium());
+         model.setZinc(model1.getZinc()+model2.getZinc());
+         model.setMagnesium(model1.getMagnesium()+model2.getMagnesium());
          return model;
      }
 }
