@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,7 +58,7 @@ public class AddNutrients extends AppCompatActivity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         mealController = new MealController();
         currentDate = new CurrentDate();
-        username = "daniel";
+        username = FirebaseAuth.getInstance().getUid().toString();
         listView = findViewById(R.id.mealListView);
         mealList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,mealList);

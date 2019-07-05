@@ -1,13 +1,9 @@
 package com.example.nutritions;
 
-import com.example.nutritions.ui.login.LoginActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
@@ -24,7 +20,6 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,35 +28,74 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    FirebaseAuth mAuth;
     DailyNutritionLimitsModel model;
     CurrentDate currentDate;
     String username;
     PieChart pieChart;
+    DatabaseReference nutrients;
     ModelFirebaseSynchronizer modelFirebaseSynchronizer;
-    DatabaseReference reference;
     TodayNutritionController todayNutritionController;
     TodayNutritionsModel todayNutritionsModel;
-    String uid;
+    FirebaseDatabase database;
+    final static int REQUEST_CODE_A = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
+        database = FirebaseDatabase.getInstance();
         Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_A);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        FirebaseApp.initializeApp(this);
         modelFirebaseSynchronizer = new ModelFirebaseSynchronizer();
-        username = "daniel";
         currentDate = new CurrentDate();
         loadDaily();
         pieChart = findViewById(R.id.pieChart);
         loadDefaultPieChart();
+        FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                System.out.println("State changed: "+firebaseAuth.getCurrentUser());
+            }
+        });
 
         initalizeBars();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        reference = database.getReference("users");
-        final DatabaseReference nutrients = database.getReference("users").child(username).child(currentDate.getCurrentDate());
+        database = FirebaseDatabase.getInstance();
+        FloatingActionButton addNutrients = findViewById(R.id.addNutrients);
+        addNutrients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("user is: " + FirebaseAuth.getInstance().getCurrentUser());
+                startActivity(new Intent(MainActivity.this, AddProduct.class));
+            }
+        });
+
+    }
+    //reference = users/uid/
+    public void saveEmptyModel( DatabaseReference reference){
+        loadDaily();
+        modelFirebaseSynchronizer.saveDailyModel(todayNutritionsModel,reference);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        String context = "onActivityResult: ";
+        switch (requestCode){
+            case REQUEST_CODE_A:
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user!=null) {
+                    setOnChangeListener();
+                } else {
+                    System.out.println("User is null");
+                }
+                break;
+        }
+    }
+
+    private void setOnChangeListener(){
+        nutrients = database.getReference("users").child(mAuth.getCurrentUser().getUid()).child(currentDate.getCurrentDate());
         nutrients.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -107,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     todayNutritionsModel.setZinc(zinc);
                     updateData();
                 } else {
-                    saveEmptyModel(reference);
+                    saveEmptyModel(database.getReference().child("users").child(mAuth.getCurrentUser().getUid()));
                 }
             }
 
@@ -116,20 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        FloatingActionButton addNutrients = findViewById(R.id.addNutrients);
-        addNutrients.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddProduct.class));
-            }
-        });
-
-    }
-
-    public void saveEmptyModel( DatabaseReference reference){
-        loadDaily();
-        modelFirebaseSynchronizer.saveDailyModel(todayNutritionsModel,reference);
     }
 
     public void updateData(){

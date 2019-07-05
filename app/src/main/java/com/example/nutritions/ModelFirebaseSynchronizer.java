@@ -40,7 +40,7 @@ public class ModelFirebaseSynchronizer {
 
     public void saveDailyModel(TodayNutritionsModel model, DatabaseReference reference){
         String dateString = date.getCurrentDate();
-        reference.child("daniel").child(dateString).setValue(model.getHashMap());
+        reference.child(dateString).setValue(model.getHashMap());
 
     }
 

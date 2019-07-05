@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +29,6 @@ public class AddProduct extends AppCompatActivity {
     String selectedFood = "";
     CurrentDate currentDate;
     DatabaseReference usersReference;
-    DatabaseReference usersReference2;
     DatabaseReference foodReference;
     DatabaseReference mealReference;
     DataSnapshot foodSnapShot;
@@ -51,9 +51,8 @@ public class AddProduct extends AppCompatActivity {
         setContentView(R.layout.activity_add_product);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         currentDate = new CurrentDate();
-        username = "daniel";
+        username = FirebaseAuth.getInstance().getCurrentUser().getUid();
         converter = new SnapshotToModelCoverter();
-        usersReference2 = database.getReference("users");
         usersReference = database.getReference("users").child(username);
         mealReference = database.getReference("users").child("meal");
         usersReference.addValueEventListener(new ValueEventListener() {
@@ -111,7 +110,7 @@ public class AddProduct extends AppCompatActivity {
                         TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(currentDate.getCurrentDate()), 100);
                         TodayNutritionsModel sum = TodayNutritionModelAdder.addModels(foodModel, todayNutritionsModel);
                         ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
-                        synchronizer.saveDailyModel(sum, usersReference2);
+                        synchronizer.saveDailyModel(sum, usersReference);
                     } else {
                         System.out.println("Food doesn't exist.");
                     }
