@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteX="16dp">
 
         <Button
-            android:id="@+id/backbutton"
+            android:id="@+id/backbuttonMeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -34,52 +34,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="@string/addProduct" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <AutoCompleteTextView
-                android:id="@+id/foodList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="@string/selectProductHint"
-                android:text=""
-                tools:layout_editor_absoluteX="185dp"
-                tools:layout_editor_absoluteY="48dp" />
-
-            <EditText
-                android:id="@+id/foodWeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="0"
-                android:inputType="numberDecimal" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/addProductButton"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_width="169dp"
-            android:layout_height="wrap_content"
-            android:text="@string/addProduct" />
 
         <LinearLayout
             android:layout_width="match_parent"

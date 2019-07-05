@@ -79,6 +79,14 @@ public class AddProduct extends AppCompatActivity {
 
             }
         });
+        Button backbutton = findViewById(R.id.backButtonProduct);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+                                              finish();
+                                          }
+                                      }
+        );
 
         FloatingActionButton addNutrients = findViewById(R.id.addMeal);
         addNutrients.setOnClickListener(new View.OnClickListener() {

@@ -92,7 +92,7 @@ public class AddNutrients extends AppCompatActivity {
             }
         });
 
-        Button backbutton = findViewById(R.id.backbutton);
+        Button backbutton = findViewById(R.id.backbuttonMeal);
         backbutton.setOnClickListener(new View.OnClickListener() {
                                           @Override
                                           public void onClick(View v) {
@@ -100,7 +100,6 @@ public class AddNutrients extends AppCompatActivity {
                                           }
                                       }
         );
-        Button addButton = findViewById(R.id.addProductButton);
         Button addProductToMealButton = findViewById(R.id.addProductMealButton);
         Button addMealButton = findViewById(R.id.addMealButton);
         addMealButton.setOnClickListener(new View.OnClickListener() {
@@ -136,37 +135,6 @@ public class AddNutrients extends AppCompatActivity {
                 }
             }
         });
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedFood.length()>=1){
-                    System.out.println(foodSnapShot.getChildrenCount());
-                    for(DataSnapshot d :foodSnapShot.getChildren()){
-                        System.out.println(d.getKey());
-                    }
-                    if (foodSnapShot.child(selectedFood).exists()){
-                        DataSnapshot food = foodSnapShot.child(selectedFood);
-                        EditText weight = findViewById(R.id.foodWeight);
-                        String gramsString = weight.getText().toString();
-                        double grams;
-                        if (gramsString.length()>=1){
-                            grams = Double.parseDouble(gramsString);
-                        } else
-                            grams=100;
-                        TodayNutritionsModel foodModel = converter.convertDataSnapshot(food,grams);
-                        TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(currentDate.getCurrentDate()),100);
-                        TodayNutritionsModel sum = TodayNutritionModelAdder.addModels(foodModel,todayNutritionsModel);
-                        ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
-                        synchronizer.saveDailyModel(sum,usersReference2);
-                    } else {
-                        System.out.println("Food doesn't exist.");
-                    }
-                } else {
-                    System.out.println("You have no selected food. . .");
-                }
-            }
-        });
-
     }
 
     public void resetMeal(){
@@ -177,28 +145,15 @@ public class AddNutrients extends AppCompatActivity {
 
 
     public void loadFood(){
-        AutoCompleteTextView foodView = findViewById(R.id.foodList);
         AutoCompleteTextView foodViewMeal = findViewById(R.id.foodListMeal);
         ArrayList<String> foodList = new ArrayList<>();
             for (DataSnapshot d : foodSnapShot.getChildren()) {
                 foodList.add(d.getKey());
             }
         System.out.println("Food Loaded");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1,foodList);
         ArrayAdapter<String> adapterMeal = new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1,foodList);
-        foodView.setAdapter(adapter);
         foodViewMeal.setAdapter(adapterMeal);
         foodViewMeal.setDropDownWidth(-1);
-        foodView.setDropDownWidth(-1);
-        foodView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selected = (String)parent.getItemAtPosition(position);
-                if (selected!=null){
-                    selectedFood = selected;
-                }
-            }
-        });
         foodViewMeal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
