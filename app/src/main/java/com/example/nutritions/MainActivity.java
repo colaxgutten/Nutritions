@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference nutrients;
     private ModelFirebaseSynchronizer modelFirebaseSynchronizer;
     private DailyNutritionLimitsModel model;
-    private TodayNutritionsModel todayNutritionsModel;
+    private Nutrition todayNutritionsModel;
     private FirebaseDatabase database;
     private FloatingActionButton addNutrients;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("MainActivity:onCreate");
 
         setContentView(R.layout.activity_main);
-        todayNutritionsModel = new TodayNutritionsModel();
+        todayNutritionsModel = new Nutrition();
         actionBar = getSupportActionBar();
         pieChart = findViewById(R.id.pieChart);
         addNutrients = findViewById(R.id.addNutrients);
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     //reference = users/uid/
     public void saveEmptyModel(DatabaseReference reference) {
-        todayNutritionsModel = new TodayNutritionsModel();
+        todayNutritionsModel = new Nutrition();
         modelFirebaseSynchronizer.saveDailyModel(todayNutritionsModel, reference);
     }
 

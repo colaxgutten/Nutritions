@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nutritions.models.Nutrition;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -113,7 +114,7 @@ public class AddProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedMeal.length()>=1){
-                    TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
+                    Nutrition todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
                     if (mealSnapShot.child(selectedMeal).exists())
                     for (DataSnapshot d : mealSnapShot.child(selectedMeal).getChildren()){
                         String foodString = d.getKey();
@@ -121,8 +122,8 @@ public class AddProduct extends AppCompatActivity {
                         double grams = d.getValue(double.class);
                         if (foodSnapShot.hasChild(foodString)) {
                             DataSnapshot food = foodSnapShot.child(foodString);
-                            TodayNutritionsModel foodModel = converter.convertDataSnapshot(food, grams);
-                            todayNutritionsModel = TodayNutritionModelAdder.addModels(todayNutritionsModel,foodModel);
+                            Nutrition foodModel = converter.convertDataSnapshot(food, grams);
+                            todayNutritionsModel.addNutrition(foodModel);
                         }
                     }
                     ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
@@ -148,11 +149,11 @@ public class AddProduct extends AppCompatActivity {
                             grams = Double.parseDouble(gramsString);
                         } else
                             grams = 100;
-                        TodayNutritionsModel foodModel = converter.convertDataSnapshot(food, grams);
-                        TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
-                        TodayNutritionsModel sum = TodayNutritionModelAdder.addModels(foodModel, todayNutritionsModel);
+                        Nutrition foodModel = converter.convertDataSnapshot(food, grams);
+                        Nutrition todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
+                        todayNutritionsModel.addNutrition(foodModel);
                         ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
-                        synchronizer.saveDailyModel(sum, usersReference);
+                        synchronizer.saveDailyModel(todayNutritionsModel, usersReference);
                     } else {
                         System.out.println("Food doesn't exist.");
                     }

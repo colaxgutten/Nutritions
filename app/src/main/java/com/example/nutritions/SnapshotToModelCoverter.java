@@ -1,14 +1,15 @@
 package com.example.nutritions;
 
+import com.example.nutritions.models.Nutrition;
 import com.google.firebase.database.DataSnapshot;
 
 public class SnapshotToModelCoverter {
-    public TodayNutritionsModel convertDataSnapshot(DataSnapshot data, double grams){
+    public Nutrition convertDataSnapshot(DataSnapshot data, double grams){
         double gramsRatio = 1.0;
         if (grams!=0){
             gramsRatio=grams/100;
         }
-        TodayNutritionsModel todayNutritionsModel = new TodayNutritionsModel();
+        Nutrition todayNutritionsModel = new Nutrition();
         System.out.println(data.getKey()+": "+grams+" grams");
         todayNutritionsModel.setKcal(data.child("kcal").getValue(Double.class)*gramsRatio);
         todayNutritionsModel.setProtein(data.child("protein").getValue(Double.class)*gramsRatio);

@@ -47,6 +47,31 @@ public class Nutrition {
         this.vitaminD = vitaminD;
     }
 
+    public void addNutrition(Nutrition nutrition){
+        if (nutrition==null)
+            return;
+        this.protein += nutrition.getProtein();
+        this.kcal += nutrition.getKcal();
+        this.fat += nutrition.getFat();
+        this.carbohydrate += nutrition.getCarbohydrate();
+        this.vitaminA += nutrition.getVitaminA();
+        this.vitaminB1 += nutrition.getVitaminB1();
+        this.vitaminB2 += nutrition.getVitaminB2();
+        this.vitaminB3 += nutrition.getVitaminB3();
+        this.vitaminB6 += nutrition.getVitaminB6();
+        this.vitaminB9 += nutrition.getVitaminB9();
+        this.vitaminB12 += nutrition.getVitaminB12();
+        this.vitaminC += nutrition.getVitaminC();
+        this.calcium += nutrition.getCalcium();
+        this.iodine += nutrition.getIodine();
+        this.iron += nutrition.getIron();
+        this.kalium += nutrition.getKalium();
+        this.magnesium += nutrition.getMagnesium();
+        this.natrium += nutrition.getNatrium();
+        this.zinc += nutrition.getZinc();
+        this.vitaminD += nutrition.getVitaminD();
+    }
+
     @Override
     public String toString() {
         return "Nutrition{" +

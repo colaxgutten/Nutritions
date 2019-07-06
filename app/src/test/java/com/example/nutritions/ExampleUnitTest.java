@@ -17,8 +17,6 @@ public class ExampleUnitTest {
 
     @Test
     public void testDate(){
-        CurrentDate date = new CurrentDate();
-        System.out.println(date.getCurrentDate());
         assertTrue(true);
     }
 }
