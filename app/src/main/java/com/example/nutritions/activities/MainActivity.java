@@ -10,7 +10,7 @@ import com.example.nutritions.ModelFirebaseSynchronizer;
 import com.example.nutritions.NutrientStringifier;
 import com.example.nutritions.R;
 import com.example.nutritions.Utility;
-import com.example.nutritions.models.Nutrition;
+import com.example.nutritions.models.Nutrients;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.ActionBar;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference nutrients;
     private ModelFirebaseSynchronizer modelFirebaseSynchronizer;
     private DailyNutritionLimitsModel model;
-    private Nutrition todayNutritionsModel;
+    private Nutrients todayNutritionsModel;
     private FirebaseDatabase database;
     private FloatingActionButton addNutrients;
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("MainActivity:onCreate");
 
         setContentView(R.layout.activity_main);
-        todayNutritionsModel = new Nutrition();
+        todayNutritionsModel = new Nutrients();
         actionBar = getSupportActionBar();
         pieChart = findViewById(R.id.pieChart);
         addNutrients = findViewById(R.id.addNutrients);
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     //reference = users/uid/
     public void saveEmptyModel(DatabaseReference reference) {
-        todayNutritionsModel = new Nutrition();
+        todayNutritionsModel = new Nutrients();
         modelFirebaseSynchronizer.saveDailyModel(todayNutritionsModel, reference);
     }
 
@@ -135,29 +135,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Nutrition nutrition = dataSnapshot.getValue(Nutrition.class);
+                    Nutrients nutrients = dataSnapshot.getValue(Nutrients.class);
 
-                    if (nutrition != null) {
-                        todayNutritionsModel.setKcal(nutrition.getKcal());
-                        todayNutritionsModel.setFat(nutrition.getFat());
-                        todayNutritionsModel.setProtein(nutrition.getProtein());
-                        todayNutritionsModel.setCarbohydrate(nutrition.getCarbohydrate());
-                        todayNutritionsModel.setVitaminA(nutrition.getVitaminA());
-                        todayNutritionsModel.setVitaminB1(nutrition.getVitaminB1());
-                        todayNutritionsModel.setVitaminB2(nutrition.getVitaminB2());
-                        todayNutritionsModel.setVitaminB3(nutrition.getVitaminB3());
-                        todayNutritionsModel.setVitaminB6(nutrition.getVitaminB6());
-                        todayNutritionsModel.setVitaminB9(nutrition.getVitaminB9());
-                        todayNutritionsModel.setVitaminB12(nutrition.getVitaminB12());
-                        todayNutritionsModel.setVitaminC(nutrition.getVitaminC());
-                        todayNutritionsModel.setVitaminD(nutrition.getVitaminD());
-                        todayNutritionsModel.setCalcium(nutrition.getCalcium());
-                        todayNutritionsModel.setIodine(nutrition.getIodine());
-                        todayNutritionsModel.setIron(nutrition.getIron());
-                        todayNutritionsModel.setMagnesium(nutrition.getMagnesium());
-                        todayNutritionsModel.setKalium(nutrition.getKalium());
-                        todayNutritionsModel.setNatrium(nutrition.getNatrium());
-                        todayNutritionsModel.setZinc(nutrition.getZinc());
+                    if (nutrients != null) {
+                        todayNutritionsModel.setKcal(nutrients.getKcal());
+                        todayNutritionsModel.setFat(nutrients.getFat());
+                        todayNutritionsModel.setProtein(nutrients.getProtein());
+                        todayNutritionsModel.setCarbohydrate(nutrients.getCarbohydrate());
+                        todayNutritionsModel.setVitaminA(nutrients.getVitaminA());
+                        todayNutritionsModel.setVitaminB1(nutrients.getVitaminB1());
+                        todayNutritionsModel.setVitaminB2(nutrients.getVitaminB2());
+                        todayNutritionsModel.setVitaminB3(nutrients.getVitaminB3());
+                        todayNutritionsModel.setVitaminB6(nutrients.getVitaminB6());
+                        todayNutritionsModel.setVitaminB9(nutrients.getVitaminB9());
+                        todayNutritionsModel.setVitaminB12(nutrients.getVitaminB12());
+                        todayNutritionsModel.setVitaminC(nutrients.getVitaminC());
+                        todayNutritionsModel.setVitaminD(nutrients.getVitaminD());
+                        todayNutritionsModel.setCalcium(nutrients.getCalcium());
+                        todayNutritionsModel.setIodine(nutrients.getIodine());
+                        todayNutritionsModel.setIron(nutrients.getIron());
+                        todayNutritionsModel.setMagnesium(nutrients.getMagnesium());
+                        todayNutritionsModel.setKalium(nutrients.getKalium());
+                        todayNutritionsModel.setNatrium(nutrients.getNatrium());
+                        todayNutritionsModel.setZinc(nutrients.getZinc());
 
                         updateData();
                         return;
@@ -262,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> getNutritionBalanceProperties() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("Nutrition");
+        list.add("Nutrients");
         list.add("Carbohydrate");
         list.add("Fat");
         return list;
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
         addDataSet();
     }
 
-    //values : Nutrition, Carbohydrate, Fat
+    //values : Nutrients, Carbohydrate, Fat
     public void addDataSet(ArrayList<Integer> values, ArrayList<String> properties) {
         String defaultErrorString = "Error";
         ArrayList<PieEntry> yEntries = new ArrayList<>();
@@ -336,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addDataSet() {
         ArrayList<PieEntry> yEntries = new ArrayList<>();
-        yEntries.add(new PieEntry(1, "Nutrition"));
+        yEntries.add(new PieEntry(1, "Nutrients"));
         yEntries.add(new PieEntry(1, "Carbohydrate"));
         yEntries.add(new PieEntry(1, "Fat"));
 

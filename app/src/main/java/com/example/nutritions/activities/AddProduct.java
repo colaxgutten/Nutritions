@@ -19,7 +19,7 @@ import com.example.nutritions.ModelFirebaseSynchronizer;
 import com.example.nutritions.R;
 import com.example.nutritions.SnapshotToModelCoverter;
 import com.example.nutritions.Utility;
-import com.example.nutritions.models.Nutrition;
+import com.example.nutritions.models.Nutrients;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -119,7 +119,7 @@ public class AddProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedMeal.length()>=1){
-                    Nutrition todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
+                    Nutrients todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
                     if (mealSnapShot.child(selectedMeal).exists())
                     for (DataSnapshot d : mealSnapShot.child(selectedMeal).getChildren()){
                         String foodString = d.getKey();
@@ -127,7 +127,7 @@ public class AddProduct extends AppCompatActivity {
                         double grams = d.getValue(double.class);
                         if (foodSnapShot.hasChild(foodString)) {
                             DataSnapshot food = foodSnapShot.child(foodString);
-                            Nutrition foodModel = converter.convertDataSnapshot(food, grams);
+                            Nutrients foodModel = converter.convertDataSnapshot(food, grams);
                             todayNutritionsModel.addNutrition(foodModel);
                         }
                     }
@@ -154,8 +154,8 @@ public class AddProduct extends AppCompatActivity {
                             grams = Double.parseDouble(gramsString);
                         } else
                             grams = 100;
-                        Nutrition foodModel = converter.convertDataSnapshot(food, grams);
-                        Nutrition todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
+                        Nutrients foodModel = converter.convertDataSnapshot(food, grams);
+                        Nutrients todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
                         todayNutritionsModel.addNutrition(foodModel);
                         ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
                         synchronizer.saveDailyModel(todayNutritionsModel, usersReference);

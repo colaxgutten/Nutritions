@@ -1,6 +1,6 @@
 package com.example.nutritions.models;
 
-public class Nutrition {
+public class Nutrients {
     private Double protein;
     private Double kcal;
     private Double fat;
@@ -22,9 +22,9 @@ public class Nutrition {
     private Double zinc;
     private Double vitaminD;
 
-    public Nutrition() {}
+    public Nutrients() {}
 
-    public Nutrition(Double protein, Double kcal, Double fat, Double carbohydrate, Double vitaminA, Double vitaminB1, Double vitaminB2, Double vitaminB3, Double vitaminB6, Double vitaminB9, Double vitaminB12, Double vitaminC, Double calcium, Double iodine, Double iron, Double kalium, Double magnesium, Double natrium, Double zinc, Double vitaminD) {
+    public Nutrients(Double protein, Double kcal, Double fat, Double carbohydrate, Double vitaminA, Double vitaminB1, Double vitaminB2, Double vitaminB3, Double vitaminB6, Double vitaminB9, Double vitaminB12, Double vitaminC, Double calcium, Double iodine, Double iron, Double kalium, Double magnesium, Double natrium, Double zinc, Double vitaminD) {
         this.protein = protein;
         this.kcal = kcal;
         this.fat = fat;
@@ -47,34 +47,34 @@ public class Nutrition {
         this.vitaminD = vitaminD;
     }
 
-    public void addNutrition(Nutrition nutrition){
-        if (nutrition==null)
+    public void addNutrition(Nutrients nutrients){
+        if (nutrients ==null)
             return;
-        this.protein += nutrition.getProtein();
-        this.kcal += nutrition.getKcal();
-        this.fat += nutrition.getFat();
-        this.carbohydrate += nutrition.getCarbohydrate();
-        this.vitaminA += nutrition.getVitaminA();
-        this.vitaminB1 += nutrition.getVitaminB1();
-        this.vitaminB2 += nutrition.getVitaminB2();
-        this.vitaminB3 += nutrition.getVitaminB3();
-        this.vitaminB6 += nutrition.getVitaminB6();
-        this.vitaminB9 += nutrition.getVitaminB9();
-        this.vitaminB12 += nutrition.getVitaminB12();
-        this.vitaminC += nutrition.getVitaminC();
-        this.calcium += nutrition.getCalcium();
-        this.iodine += nutrition.getIodine();
-        this.iron += nutrition.getIron();
-        this.kalium += nutrition.getKalium();
-        this.magnesium += nutrition.getMagnesium();
-        this.natrium += nutrition.getNatrium();
-        this.zinc += nutrition.getZinc();
-        this.vitaminD += nutrition.getVitaminD();
+        this.protein += nutrients.getProtein();
+        this.kcal += nutrients.getKcal();
+        this.fat += nutrients.getFat();
+        this.carbohydrate += nutrients.getCarbohydrate();
+        this.vitaminA += nutrients.getVitaminA();
+        this.vitaminB1 += nutrients.getVitaminB1();
+        this.vitaminB2 += nutrients.getVitaminB2();
+        this.vitaminB3 += nutrients.getVitaminB3();
+        this.vitaminB6 += nutrients.getVitaminB6();
+        this.vitaminB9 += nutrients.getVitaminB9();
+        this.vitaminB12 += nutrients.getVitaminB12();
+        this.vitaminC += nutrients.getVitaminC();
+        this.calcium += nutrients.getCalcium();
+        this.iodine += nutrients.getIodine();
+        this.iron += nutrients.getIron();
+        this.kalium += nutrients.getKalium();
+        this.magnesium += nutrients.getMagnesium();
+        this.natrium += nutrients.getNatrium();
+        this.zinc += nutrients.getZinc();
+        this.vitaminD += nutrients.getVitaminD();
     }
 
     @Override
     public String toString() {
-        return "Nutrition{" +
+        return "Nutrients{" +
                 "protein=" + protein +
                 ", kcal=" + kcal +
                 ", fat=" + fat +
