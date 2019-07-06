@@ -1,10 +1,15 @@
-package com.example.nutritions;
+package com.example.nutritions.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.example.nutritions.DailyNutritionLimitsModel;
+import com.example.nutritions.ModelFirebaseSynchronizer;
+import com.example.nutritions.NutrientStringifier;
+import com.example.nutritions.R;
+import com.example.nutritions.Utility;
 import com.example.nutritions.models.Nutrition;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

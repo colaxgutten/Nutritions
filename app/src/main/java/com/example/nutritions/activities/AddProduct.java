@@ -1,4 +1,4 @@
-package com.example.nutritions;
+package com.example.nutritions.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nutritions.MealController;
+import com.example.nutritions.ModelFirebaseSynchronizer;
+import com.example.nutritions.R;
+import com.example.nutritions.SnapshotToModelCoverter;
+import com.example.nutritions.Utility;
 import com.example.nutritions.models.Nutrition;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;

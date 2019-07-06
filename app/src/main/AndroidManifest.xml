@@ -14,22 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".MainActivity"
-            android:parentActivityName=".LoginActivity">
+            android:name=".activities.MainActivity"
+            android:parentActivityName=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddNutrients"
-            android:parentActivityName=".AddProduct" />
+            android:name=".activities.AddNutrients"
+            android:parentActivityName=".activities.AddProduct" />
         <activity
-            android:name=".AddProduct"
-            android:parentActivityName=".MainActivity" />
+            android:name=".activities.AddProduct"
+            android:parentActivityName=".activities.MainActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.nutritions;
+package com.example.nutritions.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.nutritions.MealController;
+import com.example.nutritions.R;
+import com.example.nutritions.SnapshotToModelCoverter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
