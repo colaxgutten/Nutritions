@@ -5,10 +5,13 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -24,6 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     //defining AwesomeValidation object
     private AwesomeValidation awesomeValidation;
 
+    // Inputs
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private Button loginButton;
+    private Button registerButton;
+    private ProgressBar loadingProgressBar;
+    private FirebaseAuth mAuth;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +49,15 @@ public class LoginActivity extends AppCompatActivity {
          * */
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
-        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             finishActivity(1);
         }
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
-        final Button registerButton = findViewById(R.id.register);
+        usernameEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
+        loginButton = findViewById(R.id.login);
+        registerButton = findViewById(R.id.register);
+        loadingProgressBar = findViewById(R.id.loading);
 
         awesomeValidation.addValidation(usernameEditText, Patterns.EMAIL_ADDRESS, getResources().getString(R.string.error_email));
         awesomeValidation.addValidation(passwordEditText, "^.{6,}$", getResources().getString(R.string.error_password));
@@ -74,31 +85,46 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    attemptLogin();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (awesomeValidation.validate()) {
-                    loadingProgressBar.setVisibility(View.VISIBLE);
-                    Task<AuthResult> signInTask = mAuth.signInWithEmailAndPassword(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                    signInTask.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            finish();
-                        }
-                    });
-                    signInTask.addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            showLoginFailed(e.getLocalizedMessage());
-                            loadingProgressBar.setVisibility(View.INVISIBLE);
-                        }
-                    });
-                }
+                attemptLogin();
             }
         });
     }
 
+    private void attemptLogin() {
+        if (awesomeValidation.validate()) {
+            loadingProgressBar.setVisibility(View.VISIBLE);
+            Task<AuthResult> signInTask = mAuth.signInWithEmailAndPassword(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+            signInTask.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    finish();
+                }
+            });
+            signInTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    showLoginFailed(e.getLocalizedMessage());
+                    loadingProgressBar.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+    }
 
     private void showLoginFailed(String error) {
         Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
