@@ -27,14 +27,17 @@ import java.util.ArrayList;
 public class AddProduct extends AppCompatActivity {
 
     String selectedFood = "";
+    String selectedMeal = "";
     CurrentDate currentDate;
     DatabaseReference usersReference;
     DatabaseReference foodReference;
     DatabaseReference mealReference;
     DataSnapshot foodSnapShot;
     DataSnapshot userSnapShot;
+    DataSnapshot mealSnapShot;
     SnapshotToModelCoverter converter;
-    String username;
+    String uid;
+    MealController mealController;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -49,12 +52,24 @@ public class AddProduct extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Add Product");
         setContentView(R.layout.activity_add_product);
+        mealController = new MealController();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         currentDate = new CurrentDate();
-        username = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         converter = new SnapshotToModelCoverter();
-        usersReference = database.getReference("users").child(username);
+        usersReference = database.getReference("users").child(uid);
         mealReference = database.getReference("users").child("meal");
+        mealReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mealSnapShot = dataSnapshot;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         usersReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -96,6 +111,28 @@ public class AddProduct extends AppCompatActivity {
             }
         });
 
+        Button addMealButton = findViewById(R.id.addMealButton);
+        addMealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedMeal.length()>=1){
+                    TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(currentDate.getCurrentDate()), 100);
+                    if (mealSnapShot.child(selectedMeal).exists())
+                    for (DataSnapshot d : mealSnapShot.child(selectedMeal).getChildren()){
+                        String foodString = d.getKey();
+                        System.out.println("Context: AddProduct.class, addButton.onClick: "+foodString);
+                        double grams = d.getValue(double.class);
+                        if (foodSnapShot.hasChild(foodString)) {
+                            DataSnapshot food = foodSnapShot.child(foodString);
+                            TodayNutritionsModel foodModel = converter.convertDataSnapshot(food, grams);
+                            todayNutritionsModel = TodayNutritionModelAdder.addModels(todayNutritionsModel,foodModel);
+                        }
+                    }
+                    ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
+                    synchronizer.saveDailyModel(todayNutritionsModel,usersReference);
+                }
+            }
+        });
         Button addButton = findViewById(R.id.addProductButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,11 +168,19 @@ public class AddProduct extends AppCompatActivity {
 
     public void loadFood() {
         AutoCompleteTextView foodView = findViewById(R.id.foodList);
+        AutoCompleteTextView mealView = findViewById(R.id.mealList);
+        ArrayList<String> mealList = new ArrayList<>();
+        for (DataSnapshot d : mealSnapShot.getChildren()){
+            mealList.add(d.getKey());
+        }
+        System.out.println("MealList Size: " + mealList.size());
         ArrayList<String> foodList = new ArrayList<>();
         for (DataSnapshot d : foodSnapShot.getChildren()) {
             foodList.add(d.getKey());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, foodList);
+        ArrayAdapter<String> mealAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1,mealList);
+        mealView.setAdapter(mealAdapter);
         foodView.setAdapter(adapter);
         foodView.setDropDownWidth(-1);
         foodView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -145,6 +190,12 @@ public class AddProduct extends AppCompatActivity {
                 if (selected != null) {
                     selectedFood = selected;
                 }
+            }
+        });
+        mealView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedMeal = (String) parent.getItemAtPosition(position);
             }
         });
     }
