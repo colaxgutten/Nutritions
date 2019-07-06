@@ -1,4 +1,4 @@
-package com.example.nutritions;
+package com.example.nutritions.models;
 
 public class LoginViewModel {
     private String userName;
