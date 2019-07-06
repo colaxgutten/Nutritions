@@ -1,5 +1,7 @@
 package com.example.nutritions;
 
+import com.example.nutritions.settings.StaticDefaults;
+
 public class NutrientStringifier {
     public static String ProgressBarStringify(double value,String nutrientType){
         String percentValue = "";
@@ -19,7 +21,7 @@ public class NutrientStringifier {
         double percent = 0;
         switch (nutrientType){
             case "kcal" :
-                percent = (value/StaticDefaults.MAX_KCAL)*100;
+                percent = (value/ StaticDefaults.MAX_KCAL)*100;
                 break;
             case "protein" :
                 percent = (value/StaticDefaults.MAX_PROTEINS)*100;
