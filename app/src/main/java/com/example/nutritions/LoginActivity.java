@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,7 +69,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("Login button clicked!");
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                mAuth.signInWithEmailAndPassword(usernameEditText.getText().toString(),passwordEditText.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                String usernameString = usernameEditText.getText().toString();
+                String passwordString = passwordEditText.getText().toString();
+                if (usernameString.equals("")) {
+                    showLoginFailed("Username can't be empty");
+                    loadingProgressBar.setVisibility(View.INVISIBLE);
+                    return;
+                }
+
+                if (passwordString.equals("")) {
+                    showLoginFailed("Password can't be empty");
+                    loadingProgressBar.setVisibility(View.INVISIBLE);
+                    return;
+                }
+
+                Task<AuthResult> signIn = mAuth.signInWithEmailAndPassword(usernameString, passwordString);
+                signIn.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
