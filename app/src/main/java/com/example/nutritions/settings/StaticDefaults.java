@@ -1,4 +1,4 @@
-package com.example.nutritions;
+package com.example.nutritions.settings;
 
 public class StaticDefaults {
     public static double MAX_KCAL = 2500;

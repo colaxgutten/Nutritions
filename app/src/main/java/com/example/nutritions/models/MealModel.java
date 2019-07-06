@@ -1,6 +1,5 @@
-package com.example.nutritions;
+package com.example.nutritions.models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MealModel {

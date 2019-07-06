@@ -1,5 +1,7 @@
 package com.example.nutritions;
 
+import com.example.nutritions.models.MealModel;
+
 import java.util.HashMap;
 
 public class MealController {

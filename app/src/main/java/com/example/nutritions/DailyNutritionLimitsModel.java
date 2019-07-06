@@ -1,5 +1,7 @@
 package com.example.nutritions;
 
+import com.example.nutritions.settings.StaticDefaults;
+
 public class DailyNutritionLimitsModel {
 
     private static DailyNutritionLimitsModel model;
@@ -170,7 +172,7 @@ public class DailyNutritionLimitsModel {
 
     private DailyNutritionLimitsModel(){
         //TODO - add all attriubtes to static list and set here
-        this.carbohydrateMax=StaticDefaults.MAX_CARBOHYDRATES;
+        this.carbohydrateMax= StaticDefaults.MAX_CARBOHYDRATES;
         this.proteinMax=StaticDefaults.MAX_PROTEINS;
         this.fatMax=StaticDefaults.MAX_FAT;
         this.vitaminAMax = StaticDefaults.MAX_VITAMINA;
