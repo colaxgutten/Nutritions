@@ -25,10 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class AddProduct extends AppCompatActivity {
-
     String selectedFood = "";
     String selectedMeal = "";
-    CurrentDate currentDate;
     DatabaseReference usersReference;
     DatabaseReference foodReference;
     DatabaseReference mealReference;
@@ -54,7 +52,6 @@ public class AddProduct extends AppCompatActivity {
         setContentView(R.layout.activity_add_product);
         mealController = new MealController();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        currentDate = new CurrentDate();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         converter = new SnapshotToModelCoverter();
         usersReference = database.getReference("users").child(uid);
@@ -152,7 +149,7 @@ public class AddProduct extends AppCompatActivity {
                         } else
                             grams = 100;
                         TodayNutritionsModel foodModel = converter.convertDataSnapshot(food, grams);
-                        TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(currentDate.getCurrentDate()), 100);
+                        TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
                         TodayNutritionsModel sum = TodayNutritionModelAdder.addModels(foodModel, todayNutritionsModel);
                         ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
                         synchronizer.saveDailyModel(sum, usersReference);

@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class AddNutrients extends AppCompatActivity {
     String selectedFood= "";
     String selectedFoodForMeal = "";
-    CurrentDate currentDate;
     DatabaseReference usersReference;
     DatabaseReference usersReference2;
     DatabaseReference foodReference;
@@ -57,7 +56,6 @@ public class AddNutrients extends AppCompatActivity {
         setContentView(R.layout.activity_add_nutrients);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         mealController = new MealController();
-        currentDate = new CurrentDate();
         username = FirebaseAuth.getInstance().getUid().toString();
         listView = findViewById(R.id.mealListView);
         mealList = new ArrayList<>();
