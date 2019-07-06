@@ -113,7 +113,7 @@ public class AddProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedMeal.length()>=1){
-                    TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(currentDate.getCurrentDate()), 100);
+                    TodayNutritionsModel todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
                     if (mealSnapShot.child(selectedMeal).exists())
                     for (DataSnapshot d : mealSnapShot.child(selectedMeal).getChildren()){
                         String foodString = d.getKey();
