@@ -131,7 +131,7 @@ public class AddProduct extends AppCompatActivity {
                             if (foodSnapShot.hasChild(foodString)) {
                                 DataSnapshot food = foodSnapShot.child(foodString);
                                 Nutrients foodModel = converter.convertDataSnapshot(food, grams);
-                                todayNutritionsModel.addNutrition(foodModel);
+                                todayNutritionsModel.addNutrients(foodModel);
                             }
                         }
                     }
@@ -163,7 +163,7 @@ public class AddProduct extends AppCompatActivity {
                             grams = 100;
                         Nutrients foodModel = converter.convertDataSnapshot(food, grams);
                         Nutrients todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
-                        todayNutritionsModel.addNutrition(foodModel);
+                        todayNutritionsModel.addNutrients(foodModel);
                         ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
                         synchronizer.saveDailyModel(todayNutritionsModel, usersReference);
                         Toast.makeText(AddProduct.this, "Product added", Toast.LENGTH_SHORT).show();

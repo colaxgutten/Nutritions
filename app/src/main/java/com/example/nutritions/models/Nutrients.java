@@ -22,7 +22,8 @@ public class Nutrients {
     private Double zinc;
     private Double vitaminD;
 
-    public Nutrients() {}
+    public Nutrients() {
+    }
 
     public Nutrients(Double protein, Double kcal, Double fat, Double carbohydrate, Double vitaminA, Double vitaminB1, Double vitaminB2, Double vitaminB3, Double vitaminB6, Double vitaminB9, Double vitaminB12, Double vitaminC, Double calcium, Double iodine, Double iron, Double kalium, Double magnesium, Double natrium, Double zinc, Double vitaminD) {
         this.protein = protein;
@@ -47,9 +48,10 @@ public class Nutrients {
         this.vitaminD = vitaminD;
     }
 
-    public void addNutrition(Nutrients nutrients){
-        if (nutrients ==null)
+    public void addNutrients(Nutrients nutrients) {
+        if (nutrients == null)
             return;
+
         this.protein += nutrients.getProtein();
         this.kcal += nutrients.getKcal();
         this.fat += nutrients.getFat();
