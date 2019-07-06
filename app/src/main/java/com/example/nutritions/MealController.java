@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class MealController {
     private MealModel meal;
-    private ProductFirebaseHandler firebaseHandler;
 
     public void NewMeal(){
         meal = new MealModel();
@@ -14,7 +13,6 @@ public class MealController {
 
     public MealController(){
         meal = new MealModel();
-        firebaseHandler = new ProductFirebaseHandler();
     }
 
     public void addProductToMeal(String productName, double grams){

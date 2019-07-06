@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
-import com.example.nutritions.DailyNutritionLimitsModel;
 import com.example.nutritions.ModelFirebaseSynchronizer;
 import com.example.nutritions.NutrientStringifier;
 import com.example.nutritions.R;
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private PieChart pieChart;
     private DatabaseReference nutrients;
     private ModelFirebaseSynchronizer modelFirebaseSynchronizer;
-    private DailyNutritionLimitsModel model;
     private Nutrients todayNutritionsModel;
     private FirebaseDatabase database;
     private FloatingActionButton addNutrients;
@@ -356,7 +354,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initalizeBars() {
-        model = DailyNutritionLimitsModel.getInstance();
         TextView proteinText = findViewById(R.id.proteinValue);
         TextView carbohydrateText = findViewById(R.id.carbohydrateValue);
         TextView fatText = findViewById(R.id.fatValue);

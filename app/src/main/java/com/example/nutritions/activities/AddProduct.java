@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -119,18 +120,23 @@ public class AddProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedMeal.length()>=1){
+                    boolean added = false;
                     Nutrients todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
-                    if (mealSnapShot.child(selectedMeal).exists())
-                    for (DataSnapshot d : mealSnapShot.child(selectedMeal).getChildren()){
-                        String foodString = d.getKey();
-                        System.out.println("Context: AddProduct.class, addButton.onClick: "+foodString);
-                        double grams = d.getValue(double.class);
-                        if (foodSnapShot.hasChild(foodString)) {
-                            DataSnapshot food = foodSnapShot.child(foodString);
-                            Nutrients foodModel = converter.convertDataSnapshot(food, grams);
-                            todayNutritionsModel.addNutrition(foodModel);
+                    if (mealSnapShot.child(selectedMeal).exists()) {
+                        added=true;
+                        for (DataSnapshot d : mealSnapShot.child(selectedMeal).getChildren()) {
+                            String foodString = d.getKey();
+                            System.out.println("Context: AddProduct.class, addButton.onClick: " + foodString);
+                            double grams = d.getValue(double.class);
+                            if (foodSnapShot.hasChild(foodString)) {
+                                DataSnapshot food = foodSnapShot.child(foodString);
+                                Nutrients foodModel = converter.convertDataSnapshot(food, grams);
+                                todayNutritionsModel.addNutrition(foodModel);
+                            }
                         }
                     }
+                    if (added)
+                        Toast.makeText(AddProduct.this, "Meal added", Toast.LENGTH_SHORT).show();
                     ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
                     synchronizer.saveDailyModel(todayNutritionsModel,usersReference);
                 }
@@ -149,6 +155,7 @@ public class AddProduct extends AppCompatActivity {
                         DataSnapshot food = foodSnapShot.child(selectedFood);
                         EditText weight = findViewById(R.id.foodWeight);
                         String gramsString = weight.getText().toString();
+                        weight.setText("");
                         double grams;
                         if (gramsString.length() >= 1) {
                             grams = Double.parseDouble(gramsString);
@@ -159,6 +166,7 @@ public class AddProduct extends AppCompatActivity {
                         todayNutritionsModel.addNutrition(foodModel);
                         ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
                         synchronizer.saveDailyModel(todayNutritionsModel, usersReference);
+                        Toast.makeText(AddProduct.this, "Product added", Toast.LENGTH_SHORT).show();
                     } else {
                         System.out.println("Food doesn't exist.");
                     }
