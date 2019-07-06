@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nutritions.MealController;
 import com.example.nutritions.ModelFirebaseSynchronizer;
 import com.example.nutritions.R;
-import com.example.nutritions.SnapshotToModelCoverter;
 import com.example.nutritions.Utility;
 import com.example.nutritions.models.Nutrients;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,9 +39,9 @@ public class AddProduct extends AppCompatActivity {
     DataSnapshot foodSnapShot;
     DataSnapshot userSnapShot;
     DataSnapshot mealSnapShot;
-    SnapshotToModelCoverter converter;
     String uid;
     MealController mealController;
+    private ActionBar actionBar;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -53,14 +52,16 @@ public class AddProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Add Product");
+        actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Add Product");
+        }
+
         setContentView(R.layout.activity_add_product);
         mealController = new MealController();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        converter = new SnapshotToModelCoverter();
         usersReference = database.getReference("users").child(uid);
         mealReference = database.getReference("users").child("meal");
         mealReference.addValueEventListener(new ValueEventListener() {
@@ -119,18 +120,54 @@ public class AddProduct extends AppCompatActivity {
         addMealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedMeal.length()>=1){
+                if (selectedMeal.length() >= 1) {
                     boolean added = false;
-                    Nutrients todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
+                    if (!userSnapShot.exists()) {
+                        return;
+                    }
+
+                    DataSnapshot currentDateSnapshot = userSnapShot.child(Utility.getCurrentDate());
+
+                    if (!currentDateSnapshot.exists()) {
+                        return;
+                    }
+
+                    Nutrients todayNutritionsModel = currentDateSnapshot.getValue(Nutrients.class);
+                    if (todayNutritionsModel == null) {
+                        // TODO: Figure out if we want to break / continue instead of return
+                        return;
+                    }
+
                     if (mealSnapShot.child(selectedMeal).exists()) {
-                        added=true;
+                        added = true;
                         for (DataSnapshot d : mealSnapShot.child(selectedMeal).getChildren()) {
+                            if (!d.exists()) {
+                                // TODO: Figure out if we want to break / continue instead of return
+                                return;
+                            }
+
                             String foodString = d.getKey();
                             System.out.println("Context: AddProduct.class, addButton.onClick: " + foodString);
-                            double grams = d.getValue(double.class);
-                            if (foodSnapShot.hasChild(foodString)) {
-                                DataSnapshot food = foodSnapShot.child(foodString);
-                                Nutrients foodModel = converter.convertDataSnapshot(food, grams);
+                            Double grams = d.getValue(Double.class);
+                            if (grams == null) {
+                                // TODO: Figure out if we want to break / continue instead of return
+                                return;
+                            }
+
+                            if (foodString != null && foodSnapShot.hasChild(foodString)) {
+                                DataSnapshot foodSnapshot = foodSnapShot.child(foodString);
+                                if (!foodSnapshot.exists()) {
+                                    // TODO: Figure out if we want to break / continue instead of return
+                                    return;
+                                }
+
+                                Nutrients foodModel = foodSnapshot.getValue(Nutrients.class);
+                                if (foodModel == null) {
+                                    // TODO: Figure out if we want to break / continue instead of return
+                                    return;
+                                }
+
+                                foodModel.multiplyNutrients(grams);
                                 todayNutritionsModel.addNutrients(foodModel);
                             }
                         }
@@ -138,7 +175,7 @@ public class AddProduct extends AppCompatActivity {
                     if (added)
                         Toast.makeText(AddProduct.this, "Meal added", Toast.LENGTH_SHORT).show();
                     ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
-                    synchronizer.saveDailyModel(todayNutritionsModel,usersReference);
+                    synchronizer.saveDailyModel(todayNutritionsModel, usersReference);
                 }
             }
         });
@@ -152,20 +189,47 @@ public class AddProduct extends AppCompatActivity {
                         System.out.println(d.getKey());
                     }
                     if (foodSnapShot.child(selectedFood).exists()) {
-                        DataSnapshot food = foodSnapShot.child(selectedFood);
+                        DataSnapshot foodSnapshot = foodSnapShot.child(selectedFood);
                         EditText weight = findViewById(R.id.foodWeight);
                         String gramsString = weight.getText().toString();
                         weight.setText("");
                         double grams;
-                        if (gramsString.length() >= 1) {
-                            grams = Double.parseDouble(gramsString);
-                        } else
-                            grams = 100;
-                        Nutrients foodModel = converter.convertDataSnapshot(food, grams);
-                        Nutrients todayNutritionsModel = converter.convertDataSnapshot(userSnapShot.child(Utility.getCurrentDate()), 100);
+                        if (gramsString.equals("")) {
+                            grams = 100d;
+                        } else {
+                            try {
+                                grams = Double.parseDouble(gramsString);
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                                grams = 100d;
+                            }
+                        }
+
+                        if (!foodSnapshot.exists() && !userSnapShot.exists()) {
+                            return;
+                        }
+
+                        DataSnapshot currentDateSnapshot = userSnapShot.child(Utility.getCurrentDate());
+
+                        if (!currentDateSnapshot.exists()) {
+                            return;
+                        }
+
+                        Nutrients foodModel = foodSnapshot.getValue(Nutrients.class);
+                        if (foodModel == null) {
+                            return;
+                        }
+
+                        foodModel.multiplyNutrients(grams);
+                        Nutrients todayNutritionsModel = currentDateSnapshot.getValue(Nutrients.class);
+                        if (todayNutritionsModel == null) {
+                            return;
+                        }
+
                         todayNutritionsModel.addNutrients(foodModel);
                         ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
                         synchronizer.saveDailyModel(todayNutritionsModel, usersReference);
+
                         Toast.makeText(AddProduct.this, "Product added", Toast.LENGTH_SHORT).show();
                     } else {
                         System.out.println("Food doesn't exist.");
@@ -181,7 +245,7 @@ public class AddProduct extends AppCompatActivity {
         AutoCompleteTextView foodView = findViewById(R.id.foodList);
         AutoCompleteTextView mealView = findViewById(R.id.mealList);
         ArrayList<String> mealList = new ArrayList<>();
-        for (DataSnapshot d : mealSnapShot.getChildren()){
+        for (DataSnapshot d : mealSnapShot.getChildren()) {
             mealList.add(d.getKey());
         }
         System.out.println("MealList Size: " + mealList.size());
@@ -190,7 +254,7 @@ public class AddProduct extends AppCompatActivity {
             foodList.add(d.getKey());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, foodList);
-        ArrayAdapter<String> mealAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_activated_1,mealList);
+        ArrayAdapter<String> mealAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, mealList);
         mealView.setAdapter(mealAdapter);
         foodView.setAdapter(adapter);
         foodView.setDropDownWidth(-1);

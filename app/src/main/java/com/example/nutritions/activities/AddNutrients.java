@@ -14,10 +14,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import com.example.nutritions.MealController;
 import com.example.nutritions.R;
-import com.example.nutritions.SnapshotToModelCoverter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class AddNutrients extends AppCompatActivity {
-    String selectedFood= "";
     String selectedFoodForMeal = "";
     DatabaseReference usersReference;
     DatabaseReference usersReference2;
@@ -37,7 +34,6 @@ public class AddNutrients extends AppCompatActivity {
     DataSnapshot foodSnapShot;
     DataSnapshot userSnapShot;
     MealController mealController;
-    SnapshotToModelCoverter converter;
     ArrayAdapter<String> adapter;
     ListView listView;
     ArrayList<String> mealList;
@@ -64,7 +60,6 @@ public class AddNutrients extends AppCompatActivity {
         mealList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,mealList);
         listView.setAdapter(adapter);
-        converter = new SnapshotToModelCoverter();
         usersReference2 = database.getReference("users");
         usersReference = database.getReference("users").child(username);
         mealReference = database.getReference("users").child("meal");

@@ -1,31 +1,31 @@
 package com.example.nutritions.models;
 
 public class Nutrients {
-    private Double protein;
-    private Double kcal;
-    private Double fat;
-    private Double carbohydrate;
-    private Double vitaminA;
-    private Double vitaminB1;
-    private Double vitaminB2;
-    private Double vitaminB3;
-    private Double vitaminB6;
-    private Double vitaminB9;
-    private Double vitaminB12;
-    private Double vitaminC;
-    private Double calcium;
-    private Double iodine;
-    private Double iron;
-    private Double kalium;
-    private Double magnesium;
-    private Double natrium;
-    private Double zinc;
-    private Double vitaminD;
+    private double protein;
+    private double kcal;
+    private double fat;
+    private double carbohydrate;
+    private double vitaminA;
+    private double vitaminB1;
+    private double vitaminB2;
+    private double vitaminB3;
+    private double vitaminB6;
+    private double vitaminB9;
+    private double vitaminB12;
+    private double vitaminC;
+    private double calcium;
+    private double iodine;
+    private double iron;
+    private double kalium;
+    private double magnesium;
+    private double natrium;
+    private double zinc;
+    private double vitaminD;
 
     public Nutrients() {
     }
 
-    public Nutrients(Double protein, Double kcal, Double fat, Double carbohydrate, Double vitaminA, Double vitaminB1, Double vitaminB2, Double vitaminB3, Double vitaminB6, Double vitaminB9, Double vitaminB12, Double vitaminC, Double calcium, Double iodine, Double iron, Double kalium, Double magnesium, Double natrium, Double zinc, Double vitaminD) {
+    public Nutrients(double protein, double kcal, double fat, double carbohydrate, double vitaminA, double vitaminB1, double vitaminB2, double vitaminB3, double vitaminB6, double vitaminB9, double vitaminB12, double vitaminC, double calcium, double iodine, double iron, double kalium, double magnesium, double natrium, double zinc, double vitaminD) {
         this.protein = protein;
         this.kcal = kcal;
         this.fat = fat;
@@ -74,6 +74,34 @@ public class Nutrients {
         this.vitaminD += nutrients.getVitaminD();
     }
 
+    /**
+     * Multiplies all nutrients with a given value
+     *
+     * @param multiplier - the value to multiply with
+     */
+    public void multiplyNutrients(double multiplier) {
+        setProtein(getProtein() * multiplier);
+        setKcal(getKcal() * multiplier);
+        setFat(getFat() * multiplier);
+        setCarbohydrate(getCarbohydrate() * multiplier);
+        setVitaminA(getVitaminA() * multiplier);
+        setVitaminB1(getVitaminB1() * multiplier);
+        setVitaminB2(getVitaminB2() * multiplier);
+        setVitaminB3(getVitaminB3() * multiplier);
+        setVitaminB6(getVitaminB6() * multiplier);
+        setVitaminB9(getVitaminB9() * multiplier);
+        setVitaminB12(getVitaminB12() * multiplier);
+        setVitaminC(getVitaminC() * multiplier);
+        setCalcium(getCalcium() * multiplier);
+        setIodine(getIodine() * multiplier);
+        setIron(getIron() * multiplier);
+        setKalium(getKalium() * multiplier);
+        setMagnesium(getMagnesium() * multiplier);
+        setNatrium(getNatrium() * multiplier);
+        setZinc(getZinc() * multiplier);
+        setVitaminD(getVitaminD() * multiplier);
+    }
+
     @Override
     public String toString() {
         return "Nutrients{" +
@@ -100,163 +128,163 @@ public class Nutrients {
                 '}';
     }
 
-    public Double getProtein() {
+    public double getProtein() {
         return protein;
     }
 
-    public void setProtein(Double protein) {
+    public void setProtein(double protein) {
         this.protein = protein;
     }
 
-    public Double getKcal() {
+    public double getKcal() {
         return kcal;
     }
 
-    public void setKcal(Double kcal) {
+    public void setKcal(double kcal) {
         this.kcal = kcal;
     }
 
-    public Double getFat() {
+    public double getFat() {
         return fat;
     }
 
-    public void setFat(Double fat) {
+    public void setFat(double fat) {
         this.fat = fat;
     }
 
-    public Double getCarbohydrate() {
+    public double getCarbohydrate() {
         return carbohydrate;
     }
 
-    public void setCarbohydrate(Double carbohydrate) {
+    public void setCarbohydrate(double carbohydrate) {
         this.carbohydrate = carbohydrate;
     }
 
-    public Double getVitaminA() {
+    public double getVitaminA() {
         return vitaminA;
     }
 
-    public void setVitaminA(Double vitaminA) {
+    public void setVitaminA(double vitaminA) {
         this.vitaminA = vitaminA;
     }
 
-    public Double getVitaminB1() {
+    public double getVitaminB1() {
         return vitaminB1;
     }
 
-    public void setVitaminB1(Double vitaminB1) {
+    public void setVitaminB1(double vitaminB1) {
         this.vitaminB1 = vitaminB1;
     }
 
-    public Double getVitaminB2() {
+    public double getVitaminB2() {
         return vitaminB2;
     }
 
-    public void setVitaminB2(Double vitaminB2) {
+    public void setVitaminB2(double vitaminB2) {
         this.vitaminB2 = vitaminB2;
     }
 
-    public Double getVitaminB3() {
+    public double getVitaminB3() {
         return vitaminB3;
     }
 
-    public void setVitaminB3(Double vitaminB3) {
+    public void setVitaminB3(double vitaminB3) {
         this.vitaminB3 = vitaminB3;
     }
 
-    public Double getVitaminB6() {
+    public double getVitaminB6() {
         return vitaminB6;
     }
 
-    public void setVitaminB6(Double vitaminB6) {
+    public void setVitaminB6(double vitaminB6) {
         this.vitaminB6 = vitaminB6;
     }
 
-    public Double getVitaminB9() {
+    public double getVitaminB9() {
         return vitaminB9;
     }
 
-    public void setVitaminB9(Double vitaminB9) {
+    public void setVitaminB9(double vitaminB9) {
         this.vitaminB9 = vitaminB9;
     }
 
-    public Double getVitaminB12() {
+    public double getVitaminB12() {
         return vitaminB12;
     }
 
-    public void setVitaminB12(Double vitaminB12) {
+    public void setVitaminB12(double vitaminB12) {
         this.vitaminB12 = vitaminB12;
     }
 
-    public Double getVitaminC() {
+    public double getVitaminC() {
         return vitaminC;
     }
 
-    public void setVitaminC(Double vitaminC) {
+    public void setVitaminC(double vitaminC) {
         this.vitaminC = vitaminC;
     }
 
-    public Double getCalcium() {
+    public double getCalcium() {
         return calcium;
     }
 
-    public void setCalcium(Double calcium) {
+    public void setCalcium(double calcium) {
         this.calcium = calcium;
     }
 
-    public Double getIodine() {
+    public double getIodine() {
         return iodine;
     }
 
-    public void setIodine(Double iodine) {
+    public void setIodine(double iodine) {
         this.iodine = iodine;
     }
 
-    public Double getIron() {
+    public double getIron() {
         return iron;
     }
 
-    public void setIron(Double iron) {
+    public void setIron(double iron) {
         this.iron = iron;
     }
 
-    public Double getKalium() {
+    public double getKalium() {
         return kalium;
     }
 
-    public void setKalium(Double kalium) {
+    public void setKalium(double kalium) {
         this.kalium = kalium;
     }
 
-    public Double getMagnesium() {
+    public double getMagnesium() {
         return magnesium;
     }
 
-    public void setMagnesium(Double magnesium) {
+    public void setMagnesium(double magnesium) {
         this.magnesium = magnesium;
     }
 
-    public Double getNatrium() {
+    public double getNatrium() {
         return natrium;
     }
 
-    public void setNatrium(Double natrium) {
+    public void setNatrium(double natrium) {
         this.natrium = natrium;
     }
 
-    public Double getZinc() {
+    public double getZinc() {
         return zinc;
     }
 
-    public void setZinc(Double zinc) {
+    public void setZinc(double zinc) {
         this.zinc = zinc;
     }
 
-    public Double getVitaminD() {
+    public double getVitaminD() {
         return vitaminD;
     }
 
-    public void setVitaminD(Double vitaminD) {
+    public void setVitaminD(double vitaminD) {
         this.vitaminD = vitaminD;
     }
 }
