@@ -881,6 +881,12 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/detailButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
             <com.github.mikephil.charting.charts.PieChart
                 android:layout_width="200dp"
                 android:layout_height="200dp"

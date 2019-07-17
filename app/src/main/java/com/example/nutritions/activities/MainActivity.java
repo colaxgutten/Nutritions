@@ -1,6 +1,7 @@
 package com.example.nutritions.activities;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ProgressBar;
 
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("user is: " + FirebaseAuth.getInstance().getCurrentUser());
-                startActivity(new Intent(MainActivity.this, AddProduct.class));
+                startActivity(new Intent(MainActivity.this, AddProductActivity.class));
             }
         });
 
@@ -128,7 +130,16 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        Button button = findViewById(R.id.detailButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent detailIntent = new Intent(MainActivity.this,DetailsActivity.class);
+                startActivity(detailIntent);
+            }
+        });
         nutrients = database.getReference("users").child(currentUser.getUid()).child(Utility.getCurrentDate());
+        ModelFirebaseSynchronizer sync = new ModelFirebaseSynchronizer();
         nutrients.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -33,4 +33,5 @@ public class StaticDefaults {
     public static final double DEFAULT_HEIGHT = 180;
     public static final int DEFAULT_WEEKLYEXERCISES = 3;
     public static final boolean DEFAULT_GENDER = true;
+    public static final int DEFAULT_AGE = 25;
 }

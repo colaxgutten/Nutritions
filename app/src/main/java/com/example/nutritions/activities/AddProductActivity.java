@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AddProduct extends AppCompatActivity {
+public class AddProductActivity extends AppCompatActivity {
     String selectedFood = "";
     String selectedMeal = "";
     DatabaseReference usersReference;
@@ -112,7 +112,7 @@ public class AddProduct extends AppCompatActivity {
         addNutrients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AddProduct.this, AddNutrients.class));
+                startActivity(new Intent(AddProductActivity.this, AddNutrientsActivity.class));
             }
         });
 
@@ -147,7 +147,7 @@ public class AddProduct extends AppCompatActivity {
                             }
 
                             String foodString = d.getKey();
-                            System.out.println("Context: AddProduct.class, addButton.onClick: " + foodString);
+                            System.out.println("Context: AddProductActivity.class, addButton.onClick: " + foodString);
                             Double grams = d.getValue(Double.class);
                             if (grams == null) {
                                 // TODO: Figure out if we want to break / continue instead of return
@@ -173,7 +173,7 @@ public class AddProduct extends AppCompatActivity {
                         }
                     }
                     if (added)
-                        Toast.makeText(AddProduct.this, "Meal added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddProductActivity.this, "Meal added", Toast.LENGTH_SHORT).show();
                     ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
                     synchronizer.saveDailyModel(todayNutritionsModel, usersReference);
                 }
@@ -230,7 +230,7 @@ public class AddProduct extends AppCompatActivity {
                         ModelFirebaseSynchronizer synchronizer = new ModelFirebaseSynchronizer();
                         synchronizer.saveDailyModel(todayNutritionsModel, usersReference);
 
-                        Toast.makeText(AddProduct.this, "Product added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddProductActivity.this, "Product added", Toast.LENGTH_SHORT).show();
                     } else {
                         System.out.println("Food doesn't exist.");
                     }

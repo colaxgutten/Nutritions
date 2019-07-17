@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AddNutrients extends AppCompatActivity {
+public class AddNutrientsActivity extends AppCompatActivity {
     String selectedFoodForMeal = "";
     DatabaseReference usersReference;
     DatabaseReference usersReference2;

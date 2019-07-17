@@ -80,6 +80,7 @@ public class Nutrients {
      * @param multiplier - the value to multiply with
      */
     public void multiplyNutrients(double multiplier) {
+        multiplier = multiplier/100;
         setProtein(getProtein() * multiplier);
         setKcal(getKcal() * multiplier);
         setFat(getFat() * multiplier);
