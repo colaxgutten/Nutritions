@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.example.nutritions.MealController;
 import com.example.nutritions.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AddNutrientsActivity extends AppCompatActivity {
+public class AddMealActivity extends AppCompatActivity {
     String selectedFoodForMeal = "";
     DatabaseReference usersReference;
     DatabaseReference usersReference2;
@@ -141,6 +142,10 @@ public class AddNutrientsActivity extends AppCompatActivity {
         mealController.NewMeal();
         mealList.clear();
         adapter.notifyDataSetChanged();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        loadFood();
     }
 
 

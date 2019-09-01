@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.AddNutrientsActivity"
+            android:name=".activities.AddMealActivity"
             android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".activities.AddProductActivity" />
         <activity

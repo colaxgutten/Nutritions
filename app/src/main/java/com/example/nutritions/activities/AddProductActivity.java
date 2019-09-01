@@ -127,7 +127,7 @@ public class AddProductActivity extends AppCompatActivity {
         addNutrients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AddProductActivity.this, AddNutrientsActivity.class));
+                startActivityForResult(new Intent(AddProductActivity.this, AddMealActivity.class),0);
             }
         });
 
@@ -194,6 +194,8 @@ public class AddProductActivity extends AppCompatActivity {
                 }
             }
         });
+
+
         Button addButton = findViewById(R.id.addProductButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
