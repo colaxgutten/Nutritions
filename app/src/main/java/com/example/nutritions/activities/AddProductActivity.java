@@ -1,9 +1,14 @@
 package com.example.nutritions.activities;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -39,6 +44,7 @@ public class AddProductActivity extends AppCompatActivity {
     DataSnapshot foodSnapShot;
     DataSnapshot userSnapShot;
     DataSnapshot mealSnapShot;
+    EditText weight;
     String uid;
     MealController mealController;
     private ActionBar actionBar;
@@ -60,6 +66,15 @@ public class AddProductActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_product);
         mealController = new MealController();
+        weight = findViewById(R.id.foodWeight);
+        weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         usersReference = database.getReference("users").child(uid);
@@ -190,7 +205,6 @@ public class AddProductActivity extends AppCompatActivity {
                     }
                     if (foodSnapShot.child(selectedFood).exists()) {
                         DataSnapshot foodSnapshot = foodSnapShot.child(selectedFood);
-                        EditText weight = findViewById(R.id.foodWeight);
                         String gramsString = weight.getText().toString();
                         weight.setText("");
                         double grams;
@@ -241,6 +255,12 @@ public class AddProductActivity extends AppCompatActivity {
         });
     }
 
+    public void hideKeyboard(View v){
+        Toast.makeText(getApplicationContext(), "Trying to hide Keyboard", Toast.LENGTH_SHORT).show();
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(),0);
+    }
+
     public void loadFood() {
         AutoCompleteTextView foodView = findViewById(R.id.foodList);
         AutoCompleteTextView mealView = findViewById(R.id.mealList);
@@ -273,5 +293,21 @@ public class AddProductActivity extends AppCompatActivity {
                 selectedMeal = (String) parent.getItemAtPosition(position);
             }
         });
+    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if ( v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent( event );
     }
 }
